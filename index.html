@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#FF6FA5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="えいけんクエスト">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>えいけんクエスト ★ 5きゅうにちょうせん!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EAF6F0;
+  --ink:#3A3453;
+  --pink:#FF6FA5;
+  --pink-deep:#E84E8A;
+  --yellow:#FFC93C;
+  --sky:#5EC8E5;
+  --grape:#8E7CE8;
+  --mint:#5ED6A8;
+  --card:#FFFFFF;
+  --line:#3A3453;
+  --shadow:0 6px 0 rgba(58,52,83,.18);
+  --radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'M PLUS Rounded 1c','Hiragino Maru Gothic ProN',sans-serif;
+  background:var(--bg);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255,201,60,.14) 0 60px, transparent 61px),
+    radial-gradient(circle at 85% 12%, rgba(255,111,165,.12) 0 46px, transparent 47px),
+    radial-gradient(circle at 78% 82%, rgba(94,200,229,.13) 0 70px, transparent 71px),
+    radial-gradient(circle at 10% 78%, rgba(142,124,232,.11) 0 52px, transparent 53px);
+  color:var(--ink);
+  user-select:none;
+  -webkit-user-select:none;
+  overscroll-behavior:none;
+}
+#app{max-width:520px;margin:0 auto;min-height:100dvh;padding:16px 16px 40px;display:flex;flex-direction:column}
+.screen{display:none;flex:1;flex-direction:column;animation:pop-in .3s ease}
+.screen.active{display:flex}
+@keyframes pop-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ===== common bits ===== */
+.eng{font-family:'Baloo 2','M PLUS Rounded 1c',sans-serif}
+.btn{
+  font-family:inherit;font-weight:800;color:var(--ink);
+  background:var(--card);border:3px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);cursor:pointer;
+  transition:transform .08s ease, box-shadow .08s ease;
+}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(58,52,83,.18)}
+.btn:focus-visible{outline:4px solid var(--sky);outline-offset:2px}
+
+/* ===== header ===== */
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.back-btn{font-size:15px;padding:8px 16px;border-radius:999px;background:#fff}
+.star-chip{
+  display:flex;align-items:center;gap:6px;background:#fff;border:3px solid var(--line);
+  border-radius:999px;padding:7px 14px;font-weight:800;font-size:16px;box-shadow:var(--shadow);
+}
+.star-chip .s{font-size:18px}
+
+/* ===== home ===== */
+.hero{
+  background:linear-gradient(160deg,#FFE3EF 0%,#FFF6D9 55%,#E1F5FF 100%);
+  border:3px solid var(--line);border-radius:28px;box-shadow:var(--shadow);
+  padding:18px 18px 20px;text-align:center;margin-bottom:16px;position:relative;overflow:hidden;
+}
+.hero h1{font-size:26px;letter-spacing:.02em;line-height:1.25}
+.hero h1 .eng{color:var(--pink-deep);font-size:30px;display:block}
+.hero .sub{font-size:13px;font-weight:700;color:#6b6488;margin-top:4px}
+.buddy-row{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin-top:10px;min-height:64px;font-size:44px}
+.buddy-row .b{animation:bob 2.4s ease-in-out infinite}
+.buddy-row .b:nth-child(2n){animation-delay:.4s}
+.buddy-row .b:nth-child(3n){animation-delay:.9s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+.egg-panel{
+  background:#fff;border:3px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:16px;cursor:pointer;
+}
+.egg-emoji{font-size:44px;filter:drop-shadow(0 3px 0 rgba(58,52,83,.15))}
+.egg-emoji.wiggle{animation:wig .5s ease infinite}
+@keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.egg-info{flex:1}
+.egg-info .t{font-weight:800;font-size:15px}
+.meter{height:16px;background:#EFEAF7;border:2.5px solid var(--line);border-radius:999px;overflow:hidden;margin-top:6px}
+.meter>i{display:block;height:100%;background:repeating-linear-gradient(45deg,var(--yellow) 0 10px,#FFD86B 10px 20px);width:0%;transition:width .5s ease;border-radius:999px}
+.egg-info .n{font-size:12px;font-weight:700;color:#6b6488;margin-top:4px}
+
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mode-card{
+  padding:16px 10px 14px;text-align:center;border-radius:var(--radius);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.mode-card .ic{font-size:38px}
+.mode-card .nm{font-size:16px;font-weight:800}
+.mode-card .ds{font-size:11px;font-weight:700;color:#6b6488;line-height:1.4}
+.mode-card.c1{background:#FFE9F2}
+.mode-card.c2{background:#FFF4D6}
+.mode-card.c3{background:#E3F7EE}
+.mode-card.c4{background:#E7F3FF}
+.zukan-btn{margin-top:12px;padding:13px;font-size:15px;border-radius:var(--radius);background:#F1EDFF;width:100%}
+
+/* ===== quiz ===== */
+.q-progress{display:flex;gap:6px;justify-content:center;margin-bottom:14px}
+.q-dot{width:14px;height:14px;border-radius:50%;border:2.5px solid var(--line);background:#fff;transition:background .2s}
+.q-dot.ok{background:var(--yellow)}
+.q-dot.ng{background:#D8D4E6}
+.q-dot.now{background:var(--pink)}
+.q-card{
+  background:#fff;border:3px solid var(--line);border-radius:28px;box-shadow:var(--shadow);
+  padding:20px 18px;text-align:center;margin-bottom:16px;
+}
+.q-label{display:inline-block;font-size:12px;font-weight:800;background:var(--yellow);border:2.5px solid var(--line);border-radius:999px;padding:4px 14px;margin-bottom:10px}
+.q-big-emoji{font-size:72px;line-height:1.1;margin:6px 0}
+.q-word{font-size:34px;font-weight:800;letter-spacing:.02em;margin:4px 0}
+.q-sentence{font-size:22px;font-weight:800;line-height:1.6;margin:6px 0;word-break:keep-all}
+.q-sentence .blank{
+  display:inline-block;min-width:64px;border-bottom:4px dotted var(--pink);color:var(--pink);
+  font-size:20px;padding:0 4px;
+}
+.q-ja{font-size:14px;font-weight:700;color:#6b6488;margin-top:8px}
+.listen-btn{
+  margin:10px auto 2px;display:flex;align-items:center;gap:8px;justify-content:center;
+  font-size:17px;padding:12px 26px;border-radius:999px;background:var(--sky);color:#fff;
+  border-color:var(--line);
+}
+.listen-btn .sp{font-size:22px}
+.listen-btn.small{font-size:14px;padding:8px 18px;margin-top:8px}
+.choices{display:grid;gap:12px}
+.choices.pic{grid-template-columns:1fr 1fr}
+.choice{
+  padding:14px 12px;font-size:19px;border-radius:var(--radius);position:relative;
+  display:flex;align-items:center;justify-content:center;gap:8px;min-height:58px;
+}
+.choice .ce{font-size:44px}
+.choice.correct{background:#DFF7E9;border-color:#2FA96F}
+.choice.wrong{background:#FDE3E3;border-color:#E06666}
+.choice.wrong,.shake{animation:shake .35s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.choice:disabled{cursor:default;opacity:.95}
+
+/* word order */
+.order-slot{
+  min-height:66px;background:#F4F1FB;border:3px dashed var(--grape);border-radius:20px;
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:10px;margin:10px 0 14px;
+}
+.order-pool{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.chip{padding:10px 16px;font-size:19px;border-radius:16px}
+.chip.eng{font-size:20px}
+.chip.picked{background:#EFEAF7;color:#B9B2CF;border-color:#B9B2CF;box-shadow:none;pointer-events:none}
+.slot-chip{background:#fff;border:3px solid var(--line);border-radius:14px;padding:8px 13px;font-size:19px;font-weight:800;box-shadow:0 3px 0 rgba(58,52,83,.15);cursor:pointer}
+.order-check{margin-top:14px;width:100%;padding:14px;font-size:17px;background:var(--mint);color:#fff;border-radius:var(--radius)}
+
+/* feedback banner */
+.fb{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);
+  background:#fff;border:3px solid var(--line);border-radius:999px;box-shadow:var(--shadow);
+  padding:12px 26px;font-size:20px;font-weight:800;z-index:50;transition:transform .25s ease;
+  white-space:nowrap;
+}
+.fb.show{transform:translate(-50%,0)}
+.fb.good{background:#FFF3C9}
+.fb.bad{background:#FDE9F1}
+
+/* ===== result ===== */
+.result-card{background:#fff;border:3px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:28px 20px;text-align:center;margin:auto 0}
+.result-card .big{font-size:60px}
+.result-card h2{font-size:24px;margin:8px 0 4px}
+.result-card .stars-earned{font-size:30px;letter-spacing:4px;margin:8px 0}
+.result-card .msg{font-size:14px;font-weight:700;color:#6b6488;margin-bottom:18px;line-height:1.6}
+.result-actions{display:grid;gap:10px}
+.result-actions .btn{padding:14px;font-size:16px;border-radius:var(--radius)}
+.result-actions .again{background:var(--pink);color:#fff}
+
+/* ===== hatch overlay ===== */
+#hatch{
+  position:fixed;inset:0;background:rgba(58,52,83,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
+}
+#hatch.show{display:flex}
+.hatch-card{background:linear-gradient(160deg,#FFF6D9,#FFE3EF);border:4px solid var(--line);border-radius:32px;padding:30px 24px;text-align:center;max-width:340px;width:100%;box-shadow:0 10px 0 rgba(0,0,0,.2)}
+.hatch-card .egg-stage{font-size:90px;display:block;animation:wig .4s ease infinite}
+.hatch-card .friend-stage{font-size:90px;display:none;animation:born .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes born{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1) rotate(0)}}
+.hatch-card h3{font-size:20px;margin-top:10px}
+.hatch-card .fname{font-size:22px;color:var(--pink-deep)}
+.hatch-card .tap{font-size:13px;font-weight:700;color:#6b6488;margin-top:10px}
+.hatch-card .close-h{margin-top:16px;padding:12px 30px;font-size:16px;background:var(--yellow);border-radius:999px;display:none}
+
+/* ===== zukan ===== */
+.zukan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.z-cell{background:#fff;border:3px solid var(--line);border-radius:18px;box-shadow:var(--shadow);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.z-cell .ze{font-size:34px}
+.z-cell .zn{font-size:9px;font-weight:800;text-align:center;line-height:1.2}
+.z-cell.locked{background:#EFEAF7;color:#B9B2CF;box-shadow:none}
+.z-cell.locked .ze{filter:grayscale(1);opacity:.4}
+.zukan-note{text-align:center;font-size:13px;font-weight:700;color:#6b6488;margin:12px 0}
+
+/* confetti */
+.confetti{position:fixed;top:-20px;font-size:22px;z-index:60;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.6}}
+
+h2.sec-title{font-size:20px;text-align:center;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ HOME ============ -->
+  <section class="screen active" id="scr-home">
+    <div class="top">
+      <div class="star-chip"><span class="s">⭐</span><span id="star-total">0</span> こ</div>
+      <button class="btn back-btn" id="btn-sound-test">🔊 おとのテスト</button>
+    </div>
+    <div class="hero">
+      <h1>えいけんクエスト<span class="eng">Eiken Quest!</span></h1>
+      <div class="sub">えいけん 5きゅうに ちょうせんだ!</div>
+      <div class="buddy-row" id="buddy-row"></div>
+    </div>
+    <div class="egg-panel" id="egg-panel">
+      <span class="egg-emoji" id="egg-emoji">🥚</span>
+      <div class="egg-info">
+        <div class="t">つぎの おともだちまで</div>
+        <div class="meter"><i id="egg-meter"></i></div>
+        <div class="n" id="egg-note">ほしを あつめよう!</div>
+      </div>
+    </div>
+    <div class="modes">
+      <button class="btn mode-card c1" data-mode="word">
+        <span class="ic">🍎</span><span class="nm">たんご</span>
+        <span class="ds">きいて えらぼう<br>よんで えらぼう</span>
+      </button>
+      <button class="btn mode-card c2" data-mode="grammar">
+        <span class="ic">✏️</span><span class="nm">ぶんしょう</span>
+        <span class="ds">あなうめ 3たく<br>ほんばんと おなじ!</span>
+      </button>
+      <button class="btn mode-card c3" data-mode="order">
+        <span class="ic">🧩</span><span class="nm">ならべかえ</span>
+        <span class="ds">たんごを ならべて<br>ぶんを つくろう</span>
+      </button>
+      <button class="btn mode-card c4" data-mode="listen">
+        <span class="ic">🎧</span><span class="nm">きくもんだい</span>
+        <span class="ds">おはなしを きいて<br>こたえよう</span>
+      </button>
+    </div>
+    <button class="btn zukan-btn" id="btn-zukan">📖 どうぶつフレンズずかん</button>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="screen" id="scr-quiz">
+    <div class="top">
+      <button class="btn back-btn" data-goto="home">← やめる</button>
+      <div class="star-chip"><span class="s">⭐</span><span id="star-in-quiz">0</span></div>
+    </div>
+    <div class="q-progress" id="q-progress"></div>
+    <div id="q-area"></div>
+  </section>
+
+  <!-- ============ RESULT ============ -->
+  <section class="screen" id="scr-result">
+    <div class="result-card">
+      <div class="big" id="res-emoji">🎉</div>
+      <h2 id="res-title">よくできました!</h2>
+      <div class="stars-earned" id="res-stars"></div>
+      <div class="msg" id="res-msg"></div>
+      <div class="result-actions">
+        <button class="btn again" id="btn-again">もういちど あそぶ</button>
+        <button class="btn" data-goto="home">ホームに もどる</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ZUKAN ============ -->
+  <section class="screen" id="scr-zukan">
+    <div class="top">
+      <button class="btn back-btn" data-goto="home">← もどる</button>
+      <div class="star-chip"><span class="s">⭐</span><span id="star-in-zukan">0</span></div>
+    </div>
+    <h2 class="sec-title">📖 どうぶつフレンズずかん</h2>
+    <div class="zukan-grid" id="zukan-grid"></div>
+    <div class="zukan-note">ほしを 10こ あつめるたびに<br>あたらしい おともだちが うまれるよ!</div>
+  </section>
+
+</div>
+
+<div class="fb" id="fb"></div>
+
+<div id="hatch">
+  <div class="hatch-card" id="hatch-card">
+    <span class="egg-stage" id="hatch-egg">🥚</span>
+    <span class="friend-stage" id="hatch-friend"></span>
+    <h3 id="hatch-title">タマゴが うまれそう…!<br><span class="tap">タップして わってみよう!</span></h3>
+    <div class="fname" id="hatch-name"></div>
+    <button class="btn close-h" id="hatch-close">やったー!</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ================= DATA ================= */
+/* 英検5級 頻出単語(えもじ付き) */
+const WORDS=[
+{e:"apple",j:"りんご",m:"🍎"},{e:"banana",j:"バナナ",m:"🍌"},{e:"orange",j:"オレンジ",m:"🍊"},
+{e:"egg",j:"たまご",m:"🥚"},{e:"milk",j:"ぎゅうにゅう",m:"🥛"},{e:"bread",j:"パン",m:"🍞"},
+{e:"cake",j:"ケーキ",m:"🍰"},{e:"ice cream",j:"アイスクリーム",m:"🍦"},{e:"pizza",j:"ピザ",m:"🍕"},
+{e:"rice",j:"ごはん",m:"🍚"},{e:"fish",j:"さかな",m:"🐟"},{e:"chicken",j:"とりにく",m:"🍗"},
+{e:"dog",j:"いぬ",m:"🐶"},{e:"cat",j:"ねこ",m:"🐱"},{e:"rabbit",j:"うさぎ",m:"🐰"},
+{e:"bird",j:"とり",m:"🐦"},{e:"bear",j:"くま",m:"🐻"},{e:"lion",j:"ライオン",m:"🦁"},
+{e:"monkey",j:"さる",m:"🐵"},{e:"elephant",j:"ぞう",m:"🐘"},{e:"horse",j:"うま",m:"🐴"},
+{e:"pig",j:"ぶた",m:"🐷"},{e:"mouse",j:"ねずみ",m:"🐭"},{e:"panda",j:"パンダ",m:"🐼"},
+{e:"red",j:"あか",m:"🔴"},{e:"blue",j:"あお",m:"🔵"},{e:"yellow",j:"きいろ",m:"🟡"},
+{e:"green",j:"みどり",m:"🟢"},{e:"black",j:"くろ",m:"⚫"},{e:"white",j:"しろ",m:"⚪"},
+{e:"book",j:"ほん",m:"📕"},{e:"pen",j:"ペン",m:"🖊️"},{e:"pencil",j:"えんぴつ",m:"✏️"},
+{e:"bag",j:"かばん",m:"🎒"},{e:"desk",j:"つくえ",m:"🪑"},{e:"notebook",j:"ノート",m:"📓"},
+{e:"school",j:"がっこう",m:"🏫"},{e:"house",j:"いえ",m:"🏠"},{e:"park",j:"こうえん",m:"🛝"},
+{e:"car",j:"くるま",m:"🚗"},{e:"bus",j:"バス",m:"🚌"},{e:"train",j:"でんしゃ",m:"🚃"},
+{e:"bike",j:"じてんしゃ",m:"🚲"},{e:"plane",j:"ひこうき",m:"✈️"},{e:"ship",j:"ふね",m:"🚢"},
+{e:"mother",j:"おかあさん",m:"👩"},{e:"father",j:"おとうさん",m:"👨"},{e:"sister",j:"おねえさん・いもうと",m:"👧"},
+{e:"brother",j:"おにいさん・おとうと",m:"👦"},{e:"friend",j:"ともだち",m:"🧑‍🤝‍🧑"},{e:"teacher",j:"せんせい",m:"🧑‍🏫"},
+{e:"baseball",j:"やきゅう",m:"⚾"},{e:"soccer",j:"サッカー",m:"⚽"},{e:"tennis",j:"テニス",m:"🎾"},
+{e:"basketball",j:"バスケットボール",m:"🏀"},{e:"swimming",j:"すいえい",m:"🏊"},{e:"music",j:"おんがく",m:"🎵"},
+{e:"piano",j:"ピアノ",m:"🎹"},{e:"guitar",j:"ギター",m:"🎸"},{e:"picture",j:"え・しゃしん",m:"🖼️"},
+{e:"sun",j:"たいよう",m:"☀️"},{e:"rain",j:"あめ",m:"🌧️"},{e:"snow",j:"ゆき",m:"⛄"},
+{e:"flower",j:"はな",m:"🌸"},{e:"tree",j:"き",m:"🌳"},{e:"star",j:"ほし",m:"⭐"},
+{e:"moon",j:"つき",m:"🌙"},{e:"sea",j:"うみ",m:"🌊"},{e:"mountain",j:"やま",m:"⛰️"},
+{e:"run",j:"はしる",m:"🏃"},{e:"eat",j:"たべる",m:"😋"},{e:"sleep",j:"ねる",m:"😴"},
+{e:"sing",j:"うたう",m:"🎤"},{e:"read",j:"よむ",m:"📖"},{e:"cook",j:"りょうりする",m:"🍳"}
+];
+
+/* 5級形式: あなうめ3たく */
+const GRAMMAR=[
+{q:"I ___ a student.",c:["am","is","are"],a:0,j:"わたしは がくせいです。"},
+{q:"You ___ my friend.",c:["is","are","am"],a:1,j:"あなたは わたしの ともだちです。"},
+{q:"This ___ my dog.",c:["are","am","is"],a:2,j:"これは わたしの いぬです。"},
+{q:"They ___ teachers.",c:["are","is","am"],a:0,j:"かれらは せんせいです。"},
+{q:"I ___ tennis every day.",c:["play","plays","playing"],a:0,j:"わたしは まいにち テニスをします。"},
+{q:"My mother ___ apples.",c:["like","likes","liking"],a:1,j:"おかあさんは りんごが すきです。"},
+{q:"We ___ to school.",c:["walks","walking","walk"],a:2,j:"わたしたちは がっこうへ あるいて いきます。"},
+{q:"___ you like cats?",c:["Do","Does","Is"],a:0,j:"あなたは ねこが すきですか?"},
+{q:"___ your father cook?",c:["Do","Does","Are"],a:1,j:"おとうさんは りょうりを しますか?"},
+{q:"I can ___ fast.",c:["run","runs","running"],a:0,j:"わたしは はやく はしれます。"},
+{q:"She can ___ the piano.",c:["plays","play","playing"],a:1,j:"かのじょは ピアノが ひけます。"},
+{q:"___ you swim? — Yes, I can.",c:["Do","Are","Can"],a:2,j:"あなたは およげますか? — はい、およげます。"},
+{q:"I am ___ a book now.",c:["reading","read","reads"],a:0,j:"わたしは いま ほんを よんでいます。"},
+{q:"He is ___ music.",c:["listen","listening to","listens"],a:1,j:"かれは おんがくを きいています。"},
+{q:"___ is that boy? — He is my brother.",c:["What","Where","Who"],a:2,j:"あの おとこのこは だれ? — わたしの おとうとです。"},
+{q:"___ do you eat lunch? — At twelve.",c:["When","Who","What"],a:0,j:"いつ おひるごはんを たべるの? — 12じだよ。"},
+{q:"___ is my bag? — It's on the desk.",c:["Who","Where","When"],a:1,j:"わたしの かばんは どこ? — つくえの うえだよ。"},
+{q:"___ old are you? — I'm five.",c:["What","Where","How"],a:2,j:"なんさいですか? — 5さいです。"},
+{q:"Look ___ the picture.",c:["at","on","in"],a:0,j:"えを みてください。"},
+{q:"The cat is ___ the box.",c:["at","in","to"],a:1,j:"ねこは はこの なかに います。"},
+{q:"I go to school ___ bus.",c:["by","on","at"],a:0,j:"わたしは バスで がっこうへ いきます。"},
+{q:"This is ___ book.",c:["I","my","me"],a:1,j:"これは わたしの ほんです。"},
+{q:"I like ___ very much.",c:["she","hers","her"],a:2,j:"わたしは かのじょが だいすきです。"},
+{q:"___ down, please.",c:["Sit","Sits","Sitting"],a:0,j:"すわって ください。"}
+];
+
+/* ならべかえ(正しい順で格納) */
+const ORDER=[
+{j:"わたしは ねこが すきです。",w:["I","like","cats."]},
+{j:"これは わたしの ペンです。",w:["This","is","my","pen."]},
+{j:"あなたは りんごが すきですか?",w:["Do","you","like","apples?"]},
+{j:"わたしは じょうずに うたえます。",w:["I","can","sing","well."]},
+{j:"かのじょは わたしの おかあさんです。",w:["She","is","my","mother."]},
+{j:"わたしは いま テレビを みています。",w:["I","am","watching","TV","now."]},
+{j:"あなたの かばんは どこですか?",w:["Where","is","your","bag?"]},
+{j:"かれは まいにち サッカーをします。",w:["He","plays","soccer","every","day."]},
+{j:"ドアを あけてください。",w:["Open","the","door,","please."]},
+{j:"わたしたちは がっこうへ いきます。",w:["We","go","to","school."]},
+{j:"あなたは およげますか?",w:["Can","you","swim?"]},
+{j:"あれは なんですか?",w:["What","is","that?"]}
+];
+
+/* きくもんだい: 会話→しつもん→3たく */
+const LISTEN=[
+{d:["Do you like dogs?","Yes, I do. I have a big dog."],q:"What does the girl have?",c:[{t:"a dog",m:"🐶"},{t:"a cat",m:"🐱"},{t:"a bird",m:"🐦"}],a:0},
+{d:["What do you want?","I want ice cream, please."],q:"What does the boy want?",c:[{t:"pizza",m:"🍕"},{t:"ice cream",m:"🍦"},{t:"cake",m:"🍰"}],a:1},
+{d:["Is this your pencil?","No. My pencil is red."],q:"What color is her pencil?",c:[{t:"blue",m:"🔵"},{t:"yellow",m:"🟡"},{t:"red",m:"🔴"}],a:2},
+{d:["Can you play the piano?","No, but I can play the guitar."],q:"What can the boy play?",c:[{t:"the guitar",m:"🎸"},{t:"the piano",m:"🎹"},{t:"tennis",m:"🎾"}],a:0},
+{d:["How do you go to school?","I go to school by bus."],q:"How does the girl go to school?",c:[{t:"by car",m:"🚗"},{t:"by bus",m:"🚌"},{t:"by train",m:"🚃"}],a:1},
+{d:["What are you doing?","I'm reading a book."],q:"What is the boy doing?",c:[{t:"sleeping",m:"😴"},{t:"singing",m:"🎤"},{t:"reading",m:"📖"}],a:2},
+{d:["Where is my cat?","It's under the desk."],q:"Where is the cat?",c:[{t:"under the desk",m:"🪑"},{t:"in the box",m:"📦"},{t:"on the bed",m:"🛏️"}],a:0},
+{d:["Do you like soccer?","No, I don't. I like baseball."],q:"What does the girl like?",c:[{t:"soccer",m:"⚽"},{t:"baseball",m:"⚾"},{t:"basketball",m:"🏀"}],a:1},
+{d:["What time do you get up?","I get up at seven."],q:"When does the boy get up?",c:[{t:"at six",m:"6️⃣"},{t:"at eight",m:"8️⃣"},{t:"at seven",m:"7️⃣"}],a:2},
+{d:["Whose bag is this?","It's my mother's bag."],q:"Whose bag is it?",c:[{t:"his mother's",m:"👩"},{t:"his father's",m:"👨"},{t:"his sister's",m:"👧"}],a:0},
+{d:["Is it sunny today?","No, it's raining."],q:"How is the weather?",c:[{t:"sunny",m:"☀️"},{t:"rainy",m:"🌧️"},{t:"snowy",m:"⛄"}],a:1},
+{d:["What animal do you like?","I like rabbits. They are cute!"],q:"What animal does the girl like?",c:[{t:"pandas",m:"🐼"},{t:"bears",m:"🐻"},{t:"rabbits",m:"🐰"}],a:2}
+];
+
+/* どうぶつフレンズ */
+const FRIENDS=[
+{m:"🐰",n:"ぴょんた"},{m:"🐶",n:"わんぷ"},{m:"🐱",n:"みーこ"},{m:"🐼",n:"ぱんまる"},
+{m:"🦊",n:"こんきち"},{m:"🐻",n:"くまごろう"},{m:"🐨",n:"こあらん"},{m:"🐹",n:"はむみ"},
+{m:"🦁",n:"がおくん"},{m:"🐘",n:"ぱおーん"},{m:"🦄",n:"ゆにこ"},{m:"🐧",n:"ぺんすけ"},
+{m:"🦉",n:"ふくまる"},{m:"🐬",n:"いるりん"},{m:"🐢",n:"かめきち"},{m:"🦋",n:"ちょうこ"},
+{m:"🐿️",n:"りすぴー"},{m:"🦒",n:"きりんぼ"},{m:"🐣",n:"ぴよち"},{m:"🐉",n:"どらごん"}
+];
+const STARS_PER_FRIEND=10, Q_PER_SESSION=5;
+
+/* ================= STORAGE ================= */
+const store=(()=>{let mem={};let ok=true;
+  try{localStorage.setItem("_t","1");localStorage.removeItem("_t");}catch(e){ok=false;}
+  return{
+    load(){try{if(ok){const s=localStorage.getItem("eikenquest_v1");if(s)return JSON.parse(s);}}catch(e){}return mem.d||{stars:0,hatched:0,plays:0};},
+    save(d){mem.d=d;try{if(ok)localStorage.setItem("eikenquest_v1",JSON.stringify(d));}catch(e){}}
+  };
+})();
+let S=store.load();
+
+/* ================= AUDIO (TTS) ================= */
+let enVoice=null;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  enVoice=vs.find(v=>/en[-_]US/i.test(v.lang)&&/Samantha|Google US/i.test(v.name))
+        ||vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
+}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+function speak(text,rate=0.8){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US";if(enVoice)u.voice=enVoice;
+  u.rate=rate;u.pitch=1.1;
+  speechSynthesis.speak(u);
+}
+function speakLines(lines,rate=0.8){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  lines.forEach((t,i)=>{
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang="en-US";if(enVoice)u.voice=enVoice;
+    u.rate=rate;u.pitch=i%2===0?1.0:1.25; /* A/Bで声色をかえる */
+    speechSynthesis.speak(u);
+  });
+}
+
+/* ================= HELPERS ================= */
+const $=s=>document.querySelector(s);
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function sample(a,n){return shuffle(a).slice(0,n);}
+function goto(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $("#scr-"+id).classList.add("active");
+  if(id==="home")renderHome();
+  if(id==="zukan")renderZukan();
+  window.scrollTo(0,0);
+}
+function fb(text,good){
+  const el=$("#fb");
+  el.textContent=text;
+  el.className="fb show "+(good?"good":"bad");
+  clearTimeout(fb._t);
+  fb._t=setTimeout(()=>el.classList.remove("show"),1400);
+}
+function confetti(){
+  const ems=["⭐","🌟","💖","🎀","✨","🍬"];
+  for(let i=0;i<14;i++){
+    const d=document.createElement("div");
+    d.className="confetti";
+    d.textContent=ems[Math.floor(Math.random()*ems.length)];
+    d.style.left=Math.random()*100+"vw";
+    d.style.animationDuration=(1.2+Math.random()*1.2)+"s";
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove(),2600);
+  }
+}
+
+/* ================= HOME ================= */
+function renderHome(){
+  $("#star-total").textContent=S.stars;
+  const inEgg=S.stars-S.hatched*STARS_PER_FRIEND;
+  const pct=Math.min(100,inEgg/STARS_PER_FRIEND*100);
+  $("#egg-meter").style.width=pct+"%";
+  const eggEl=$("#egg-emoji");
+  if(S.hatched>=FRIENDS.length){
+    eggEl.textContent="👑";eggEl.classList.remove("wiggle");
+    $("#egg-note").textContent="ぜんぶの おともだちが うまれたよ! すごい!";
+  }else{
+    eggEl.textContent=inEgg>=STARS_PER_FRIEND?"🐣":"🥚";
+    eggEl.classList.toggle("wiggle",inEgg>=STARS_PER_FRIEND-2);
+    $("#egg-note").textContent=inEgg>=STARS_PER_FRIEND
+      ?"タップして タマゴを わろう!"
+      :"あと ほし "+(STARS_PER_FRIEND-inEgg)+"こで うまれるよ";
+  }
+  const row=$("#buddy-row");
+  row.innerHTML="";
+  if(S.hatched===0){row.innerHTML='<span class="b">🥚</span>';}
+  else FRIENDS.slice(Math.max(0,S.hatched-5),S.hatched).forEach(f=>{
+    const s=document.createElement("span");s.className="b";s.textContent=f.m;row.appendChild(s);
+  });
+}
+$("#egg-panel").addEventListener("click",()=>{ if(canHatch()) doHatch(); });
+function canHatch(){return S.hatched<FRIENDS.length && S.stars-S.hatched*STARS_PER_FRIEND>=STARS_PER_FRIEND;}
+
+/* ================= HATCH ================= */
+function doHatch(){
+  const f=FRIENDS[S.hatched];
+  const ov=$("#hatch"),egg=$("#hatch-egg"),fr=$("#hatch-friend");
+  egg.style.display="block";fr.style.display="none";
+  egg.textContent="🥚";fr.textContent=f.m;
+  $("#hatch-title").innerHTML='タマゴが うまれそう…!<br><span class="tap">タップして わってみよう!</span>';
+  $("#hatch-name").textContent="";
+  $("#hatch-close").style.display="none";
+  ov.classList.add("show");
+  let taps=0;
+  const onTap=()=>{
+    taps++;
+    if(taps===1)egg.textContent="🥚💥";
+    if(taps>=2){
+      egg.style.display="none";fr.style.display="block";
+      $("#hatch-title").innerHTML="おともだちが うまれた!";
+      $("#hatch-name").textContent=f.m+" "+f.n;
+      $("#hatch-close").style.display="inline-block";
+      confetti();
+      speak("Hello! Nice to meet you!",0.9);
+      S.hatched++;store.save(S);
+      $("#hatch-card").removeEventListener("click",onTap);
+    }
+  };
+  $("#hatch-card").addEventListener("click",onTap);
+}
+$("#hatch-close").addEventListener("click",e=>{
+  e.stopPropagation();
+  $("#hatch").classList.remove("show");
+  renderHome();
+  if(canHatch())setTimeout(doHatch,400); /* 連続でうまれる場合 */
+});
+
+/* ================= ZUKAN ================= */
+function renderZukan(){
+  $("#star-in-zukan").textContent=S.stars;
+  const g=$("#zukan-grid");g.innerHTML="";
+  FRIENDS.forEach((f,i)=>{
+    const c=document.createElement("div");
+    c.className="z-cell"+(i<S.hatched?"":" locked");
+    c.innerHTML='<span class="ze">'+(i<S.hatched?f.m:"❓")+'</span><span class="zn">'+(i<S.hatched?f.n:"？？？")+"</span>";
+    g.appendChild(c);
+  });
+}
+
+/* ================= QUIZ ENGINE ================= */
+let sess=null;
+function startSession(mode){
+  let qs;
+  if(mode==="word"){
+    qs=sample(WORDS,Q_PER_SESSION).map(w=>({type:Math.random()<0.5?"w-listen":"w-read",w}));
+  }else if(mode==="grammar"){
+    qs=sample(GRAMMAR,Q_PER_SESSION).map(g=>({type:"grammar",g}));
+  }else if(mode==="order"){
+    qs=sample(ORDER,Q_PER_SESSION).map(o=>({type:"order",o}));
+  }else{
+    qs=sample(LISTEN,Q_PER_SESSION).map(l=>({type:"listen",l}));
+  }
+  sess={mode,qs,i:0,correct:0,results:[]};
+  $("#star-in-quiz").textContent=S.stars;
+  goto("quiz");
+  renderQ();
+}
+function renderProgress(){
+  const p=$("#q-progress");p.innerHTML="";
+  sess.qs.forEach((_,i)=>{
+    const d=document.createElement("div");
+    d.className="q-dot "+(i<sess.i?(sess.results[i]?"ok":"ng"):i===sess.i?"now":"");
+    p.appendChild(d);
+  });
+}
+function award(good){
+  sess.results.push(good);
+  if(good){sess.correct++;S.stars++;store.save(S);$("#star-in-quiz").textContent=S.stars;confetti();}
+}
+function next(delay){
+  setTimeout(()=>{
+    sess.i++;
+    if(sess.i>=sess.qs.length)showResult();
+    else renderQ();
+  },delay);
+}
+function lockChoices(area){area.querySelectorAll(".choice").forEach(b=>b.disabled=true);}
+
+function renderQ(){
+  renderProgress();
+  const q=sess.qs[sess.i],area=$("#q-area");
+  if(q.type==="w-listen")renderWordListen(q,area);
+  else if(q.type==="w-read")renderWordRead(q,area);
+  else if(q.type==="grammar")renderGrammar(q,area);
+  else if(q.type==="order")renderOrder(q,area);
+  else renderListen(q,area);
+}
+
+/* --- たんご: きいて絵をえらぶ --- */
+function renderWordListen(q,area){
+  const others=sample(WORDS.filter(w=>w.e!==q.w.e),3);
+  const opts=shuffle([q.w,...others]);
+  area.innerHTML=
+    '<div class="q-card"><span class="q-label">🍎 たんご</span>'+
+    '<div class="q-sentence">どの えかな?</div>'+
+    '<button class="btn listen-btn" id="q-play"><span class="sp">🔊</span> きく</button></div>'+
+    '<div class="choices pic" id="q-ch"></div>';
+  opts.forEach(w=>{
+    const b=document.createElement("button");
+    b.className="btn choice";b.innerHTML='<span class="ce">'+w.m+"</span>";
+    b.addEventListener("click",()=>{
+      lockChoices(area);
+      const good=w.e===q.w.e;
+      b.classList.add(good?"correct":"wrong");
+      if(!good)[...area.querySelectorAll(".choice")].find(x=>x.dataset.e===q.w.e).classList.add("correct");
+      fb(good?"せいかい! ⭐":"ざんねん! こたえは「"+q.w.j+"」",good);
+      speak(q.w.e,0.75);
+      award(good);next(good?1500:2300);
+    });
+    b.dataset.e=w.e;
+    $("#q-ch",area).appendChild(b);
+  });
+  $("#q-play").addEventListener("click",()=>speak(q.w.e,0.7));
+  setTimeout(()=>speak(q.w.e,0.7),350);
+}
+
+/* --- たんご: よんでえらぶ --- */
+function renderWordRead(q,area){
+  const others=sample(WORDS.filter(w=>w.e!==q.w.e),2);
+  const opts=shuffle([q.w,...others]);
+  area.innerHTML=
+    '<div class="q-card"><span class="q-label">🍎 たんご(よむ)</span>'+
+    '<div class="q-big-emoji">'+q.w.m+'</div>'+
+    '<div class="q-ja">えいごで なんて いうかな? よんでみよう!</div></div>'+
+    '<div class="choices" id="q-ch"></div>';
+  opts.forEach(w=>{
+    const b=document.createElement("button");
+    b.className="btn choice eng";b.textContent=w.e;
+    b.addEventListener("click",()=>{
+      lockChoices(area);
+      const good=w.e===q.w.e;
+      b.classList.add(good?"correct":"wrong");
+      if(!good)[...area.querySelectorAll(".choice")].find(x=>x.textContent===q.w.e).classList.add("correct");
+      fb(good?"せいかい! ⭐":"こたえは "+q.w.e+" だよ",good);
+      speak(q.w.e,0.75);
+      award(good);next(good?1500:2300);
+    });
+    $("#q-ch",area).appendChild(b);
+  });
+}
+
+/* --- ぶんしょう(あなうめ3たく) --- */
+function renderGrammar(q,area){
+  const g=q.g;
+  const parts=g.q.split("___");
+  const idxs=shuffle([0,1,2]);
+  area.innerHTML=
+    '<div class="q-card"><span class="q-label">✏️ ぶんしょう</span>'+
+    '<div class="q-sentence eng">'+parts[0]+'<span class="blank">？</span>'+(parts[1]||"")+'</div>'+
+    '<div class="q-ja">'+g.j+'</div>'+
+    '<button class="btn listen-btn small" id="q-play"><span class="sp">🔊</span> ぶんを きく</button></div>'+
+    '<div class="choices" id="q-ch"></div>';
+  idxs.forEach(i=>{
+    const b=document.createElement("button");
+    b.className="btn choice eng";b.textContent=g.c[i];
+    b.addEventListener("click",()=>{
+      lockChoices(area);
+      const good=i===g.a;
+      b.classList.add(good?"correct":"wrong");
+      if(!good)[...area.querySelectorAll(".choice")].find(x=>x.textContent===g.c[g.a]).classList.add("correct");
+      area.querySelector(".blank").textContent=g.c[g.a];
+      fb(good?"せいかい! ⭐":"こたえは "+g.c[g.a]+" だよ",good);
+      speak(g.q.replace("___",g.c[g.a]),0.8);
+      award(good);next(good?1900:2600);
+    });
+    $("#q-ch",area).appendChild(b);
+  });
+  $("#q-play").addEventListener("click",()=>speak(g.q.replace("___","hmm"),0.75));
+}
+
+/* --- ならべかえ --- */
+function renderOrder(q,area){
+  const o=q.o;
+  const pool=shuffle(o.w.map((w,i)=>({w,i})));
+  let slot=[],firstTry=true,done=false;
+  area.innerHTML=
+    '<div class="q-card"><span class="q-label">🧩 ならべかえ</span>'+
+    '<div class="q-ja" style="font-size:16px">'+o.j+'</div>'+
+    '<div class="order-slot" id="o-slot"></div>'+
+    '<div class="order-pool" id="o-pool"></div>'+
+    '<button class="btn order-check" id="o-check">できた!</button></div>';
+  const slotEl=$("#o-slot"),poolEl=$("#o-pool");
+  function draw(){
+    slotEl.innerHTML=slot.length?"":'<span style="color:#B9B2CF;font-weight:700;font-size:14px">ここに たんごを ならべてね</span>';
+    slot.forEach((it,si)=>{
+      const c=document.createElement("button");
+      c.className="slot-chip eng";c.textContent=it.w;
+      c.addEventListener("click",()=>{if(done)return;slot.splice(si,1);draw();});
+      slotEl.appendChild(c);
+    });
+    poolEl.innerHTML="";
+    pool.forEach(it=>{
+      const used=slot.includes(it);
+      const c=document.createElement("button");
+      c.className="btn chip eng"+(used?" picked":"");
+      c.textContent=it.w;
+      c.addEventListener("click",()=>{if(done||slot.includes(it))return;slot.push(it);draw();speak(it.w.replace(/[.,?!]/g,""),0.85);});
+      poolEl.appendChild(c);
+    });
+  }
+  draw();
+  $("#o-check").addEventListener("click",()=>{
+    if(done)return;
+    if(slot.length<o.w.length){fb("ぜんぶの たんごを つかってね",false);return;}
+    const ok=slot.every((it,si)=>it.i===si);
+    if(ok){
+      done=true;
+      fb(firstTry?"せいかい! ⭐":"できたね!",true);
+      speak(o.w.join(" "),0.8);
+      award(firstTry);next(2000);
+    }else{
+      fb("おしい! もういちど ならべてみよう",false);
+      slotEl.classList.add("shake");setTimeout(()=>slotEl.classList.remove("shake"),400);
+      if(firstTry){firstTry=false;}
+      else{ /* 2回まちがえたら こたえを見せる */
+        done=true;
+        slot=o.w.map((w,i)=>({w,i}));draw();
+        fb("こたえは これだよ!",false);
+        speak(o.w.join(" "),0.75);
+        award(false);next(2600);
+      }
+    }
+  });
+}
+
+/* --- きくもんだい --- */
+function renderListen(q,area){
+  const l=q.l;
+  const idxs=shuffle([0,1,2]);
+  area.innerHTML=
+    '<div class="q-card"><span class="q-label">🎧 きくもんだい</span>'+
+    '<div class="q-big-emoji">👧💬👦</div>'+
+    '<div class="q-ja">おはなしと しつもんを よくきいてね</div>'+
+    '<button class="btn listen-btn" id="q-play"><span class="sp">🔊</span> きく</button></div>'+
+    '<div class="choices" id="q-ch"></div>';
+  const playAll=()=>speakLines([...l.d,"Question. "+l.q],0.78);
+  idxs.forEach(i=>{
+    const c=l.c[i];
+    const b=document.createElement("button");
+    b.className="btn choice";
+    b.innerHTML='<span class="ce" style="font-size:32px">'+c.m+'</span><span class="eng" style="font-size:18px">'+c.t+"</span>";
+    b.addEventListener("click",()=>{
+      lockChoices(area);
+      const good=i===l.a;
+      b.classList.add(good?"correct":"wrong");
+      if(!good)[...area.querySelectorAll(".choice")][idxs.indexOf(l.a)].classList.add("correct");
+      fb(good?"せいかい! ⭐":"こたえは "+l.c[l.a].t+" だよ",good);
+      speak(l.c[l.a].t,0.8);
+      award(good);next(good?1600:2400);
+    });
+    $("#q-ch",area).appendChild(b);
+  });
+  $("#q-play").addEventListener("click",playAll);
+  setTimeout(playAll,400);
+}
+
+/* ================= RESULT ================= */
+function showResult(){
+  S.plays++;store.save(S);
+  const c=sess.correct,n=sess.qs.length;
+  $("#res-stars").textContent="⭐".repeat(c)+"☆".repeat(n-c);
+  if(c===n){$("#res-emoji").textContent="🏆";$("#res-title").textContent="パーフェクト!";$("#res-msg").textContent="ぜんぶ せいかい! すごい! 5きゅう ごうかくに ちかづいたよ!";speak("Perfect! Great job!",0.9);}
+  else if(c>=3){$("#res-emoji").textContent="🎉";$("#res-title").textContent="よくできました!";$("#res-msg").textContent="ほしを "+c+"こ ゲット! そのちょうし!";speak("Good job!",0.9);}
+  else{$("#res-emoji").textContent="💪";$("#res-title").textContent="がんばったね!";$("#res-msg").textContent="まちがえても だいじょうぶ。もういちど やってみよう!";speak("Nice try!",0.9);}
+  goto("result");
+  if(canHatch())setTimeout(doHatch,900);
+}
+$("#btn-again").addEventListener("click",()=>startSession(sess.mode));
+
+/* ================= WIRING ================= */
+document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>startSession(b.dataset.mode)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>{if("speechSynthesis" in window)speechSynthesis.cancel();goto(b.dataset.goto);}));
+$("#btn-zukan").addEventListener("click",()=>goto("zukan"));
+$("#btn-sound-test").addEventListener("click",()=>{speak("Hello! Let's learn English together!",0.85);fb("きこえたかな? 🔊",true);});
+
+renderHome();
+
+/* ================= PWA ================= */
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
