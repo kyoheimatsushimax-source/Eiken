@@ -312,90 +312,310 @@ h2.sec-title{font-size:20px;text-align:center;margin-bottom:14px}
 /* 英検5級 頻出単語(えもじ付き) */
 const WORDS=[
 {e:"apple",j:"りんご",m:"🍎"},{e:"banana",j:"バナナ",m:"🍌"},{e:"orange",j:"オレンジ",m:"🍊"},
-{e:"egg",j:"たまご",m:"🥚"},{e:"milk",j:"ぎゅうにゅう",m:"🥛"},{e:"bread",j:"パン",m:"🍞"},
-{e:"cake",j:"ケーキ",m:"🍰"},{e:"ice cream",j:"アイスクリーム",m:"🍦"},{e:"pizza",j:"ピザ",m:"🍕"},
+{e:"grapes",j:"ぶどう",m:"🍇"},{e:"strawberry",j:"いちご",m:"🍓"},{e:"peach",j:"もも",m:"🍑"},
+{e:"melon",j:"メロン",m:"🍈"},{e:"watermelon",j:"すいか",m:"🍉"},{e:"cherry",j:"さくらんぼ",m:"🍒"},
+{e:"lemon",j:"レモン",m:"🍋"},{e:"pineapple",j:"パイナップル",m:"🍍"},{e:"kiwi",j:"キウイ",m:"🥝"},
+{e:"tomato",j:"トマト",m:"🍅"},{e:"potato",j:"じゃがいも",m:"🥔"},{e:"onion",j:"たまねぎ",m:"🧅"},
+{e:"carrot",j:"にんじん",m:"🥕"},{e:"corn",j:"とうもろこし",m:"🌽"},{e:"pumpkin",j:"かぼちゃ",m:"🎃"},
+{e:"mushroom",j:"きのこ",m:"🍄"},{e:"salad",j:"サラダ",m:"🥗"},{e:"egg",j:"たまご",m:"🥚"},
+{e:"milk",j:"ぎゅうにゅう",m:"🥛"},{e:"juice",j:"ジュース",m:"🧃"},{e:"water",j:"みず",m:"💧"},
+{e:"tea",j:"おちゃ",m:"🍵"},{e:"coffee",j:"コーヒー",m:"☕"},{e:"bread",j:"パン",m:"🍞"},
 {e:"rice",j:"ごはん",m:"🍚"},{e:"fish",j:"さかな",m:"🐟"},{e:"chicken",j:"とりにく",m:"🍗"},
+{e:"meat",j:"おにく",m:"🥩"},{e:"cake",j:"ケーキ",m:"🍰"},{e:"ice cream",j:"アイスクリーム",m:"🍦"},
+{e:"pizza",j:"ピザ",m:"🍕"},{e:"hamburger",j:"ハンバーガー",m:"🍔"},{e:"sandwich",j:"サンドイッチ",m:"🥪"},
+{e:"spaghetti",j:"スパゲッティ",m:"🍝"},{e:"curry",j:"カレー",m:"🍛"},{e:"soup",j:"スープ",m:"🥣"},
+{e:"cookie",j:"クッキー",m:"🍪"},{e:"candy",j:"あめ",m:"🍬"},{e:"chocolate",j:"チョコレート",m:"🍫"},
+{e:"donut",j:"ドーナツ",m:"🍩"},{e:"cheese",j:"チーズ",m:"🧀"},{e:"pie",j:"パイ",m:"🥧"},
 {e:"dog",j:"いぬ",m:"🐶"},{e:"cat",j:"ねこ",m:"🐱"},{e:"rabbit",j:"うさぎ",m:"🐰"},
 {e:"bird",j:"とり",m:"🐦"},{e:"bear",j:"くま",m:"🐻"},{e:"lion",j:"ライオン",m:"🦁"},
-{e:"monkey",j:"さる",m:"🐵"},{e:"elephant",j:"ぞう",m:"🐘"},{e:"horse",j:"うま",m:"🐴"},
-{e:"pig",j:"ぶた",m:"🐷"},{e:"mouse",j:"ねずみ",m:"🐭"},{e:"panda",j:"パンダ",m:"🐼"},
+{e:"tiger",j:"とら",m:"🐯"},{e:"monkey",j:"さる",m:"🐵"},{e:"elephant",j:"ぞう",m:"🐘"},
+{e:"horse",j:"うま",m:"🐴"},{e:"pig",j:"ぶた",m:"🐷"},{e:"cow",j:"うし",m:"🐮"},
+{e:"sheep",j:"ひつじ",m:"🐑"},{e:"mouse",j:"ねずみ",m:"🐭"},{e:"panda",j:"パンダ",m:"🐼"},
+{e:"fox",j:"きつね",m:"🦊"},{e:"wolf",j:"おおかみ",m:"🐺"},{e:"koala",j:"コアラ",m:"🐨"},
+{e:"penguin",j:"ペンギン",m:"🐧"},{e:"frog",j:"かえる",m:"🐸"},{e:"snake",j:"へび",m:"🐍"},
+{e:"shark",j:"さめ",m:"🦈"},{e:"dolphin",j:"いるか",m:"🐬"},{e:"whale",j:"くじら",m:"🐳"},
+{e:"turtle",j:"かめ",m:"🐢"},{e:"octopus",j:"たこ",m:"🐙"},{e:"bee",j:"はち",m:"🐝"},
+{e:"butterfly",j:"ちょう",m:"🦋"},{e:"ant",j:"あり",m:"🐜"},{e:"spider",j:"くも",m:"🕷️"},
+{e:"chick",j:"ひよこ",m:"🐤"},{e:"duck",j:"あひる",m:"🦆"},{e:"owl",j:"ふくろう",m:"🦉"},
+{e:"giraffe",j:"きりん",m:"🦒"},{e:"zebra",j:"しまうま",m:"🦓"},{e:"deer",j:"しか",m:"🦌"},
 {e:"red",j:"あか",m:"🔴"},{e:"blue",j:"あお",m:"🔵"},{e:"yellow",j:"きいろ",m:"🟡"},
 {e:"green",j:"みどり",m:"🟢"},{e:"black",j:"くろ",m:"⚫"},{e:"white",j:"しろ",m:"⚪"},
+{e:"pink",j:"ピンク",m:"🩷"},{e:"purple",j:"むらさき",m:"🟣"},{e:"brown",j:"ちゃいろ",m:"🟤"},
+{e:"one",j:"1(いち)",m:"1️⃣"},{e:"two",j:"2(に)",m:"2️⃣"},{e:"three",j:"3(さん)",m:"3️⃣"},
+{e:"four",j:"4(よん)",m:"4️⃣"},{e:"five",j:"5(ご)",m:"5️⃣"},{e:"six",j:"6(ろく)",m:"6️⃣"},
+{e:"seven",j:"7(なな)",m:"7️⃣"},{e:"eight",j:"8(はち)",m:"8️⃣"},{e:"nine",j:"9(きゅう)",m:"9️⃣"},
+{e:"ten",j:"10(じゅう)",m:"🔟"},
 {e:"book",j:"ほん",m:"📕"},{e:"pen",j:"ペン",m:"🖊️"},{e:"pencil",j:"えんぴつ",m:"✏️"},
-{e:"bag",j:"かばん",m:"🎒"},{e:"desk",j:"つくえ",m:"🪑"},{e:"notebook",j:"ノート",m:"📓"},
+{e:"eraser",j:"けしゴム",m:"🩹"},{e:"ruler",j:"じょうぎ",m:"📏"},{e:"notebook",j:"ノート",m:"📓"},
+{e:"bag",j:"かばん",m:"🎒"},{e:"desk",j:"つくえ",m:"🗄️"},{e:"chair",j:"いす",m:"🪑"},
+{e:"scissors",j:"はさみ",m:"✂️"},{e:"crayon",j:"クレヨン",m:"🖍️"},{e:"clock",j:"とけい",m:"🕐"},
+{e:"computer",j:"コンピューター",m:"💻"},{e:"camera",j:"カメラ",m:"📷"},{e:"umbrella",j:"かさ",m:"☂️"},
 {e:"school",j:"がっこう",m:"🏫"},{e:"house",j:"いえ",m:"🏠"},{e:"park",j:"こうえん",m:"🛝"},
+{e:"zoo",j:"どうぶつえん",m:"🦁"},{e:"library",j:"としょかん",m:"📚"},{e:"hospital",j:"びょういん",m:"🏥"},
+{e:"station",j:"えき",m:"🚉"},{e:"store",j:"おみせ",m:"🏪"},{e:"restaurant",j:"レストラン",m:"🍽️"},
+{e:"pool",j:"プール",m:"🏊"},{e:"beach",j:"はまべ",m:"🏖️"},{e:"castle",j:"おしろ",m:"🏰"},
+{e:"farm",j:"のうじょう",m:"🚜"},{e:"bridge",j:"はし",m:"🌉"},
 {e:"car",j:"くるま",m:"🚗"},{e:"bus",j:"バス",m:"🚌"},{e:"train",j:"でんしゃ",m:"🚃"},
 {e:"bike",j:"じてんしゃ",m:"🚲"},{e:"plane",j:"ひこうき",m:"✈️"},{e:"ship",j:"ふね",m:"🚢"},
+{e:"boat",j:"ボート",m:"⛵"},{e:"taxi",j:"タクシー",m:"🚕"},{e:"truck",j:"トラック",m:"🚚"},
+{e:"rocket",j:"ロケット",m:"🚀"},
 {e:"mother",j:"おかあさん",m:"👩"},{e:"father",j:"おとうさん",m:"👨"},{e:"sister",j:"おねえさん・いもうと",m:"👧"},
-{e:"brother",j:"おにいさん・おとうと",m:"👦"},{e:"friend",j:"ともだち",m:"🧑‍🤝‍🧑"},{e:"teacher",j:"せんせい",m:"🧑‍🏫"},
+{e:"brother",j:"おにいさん・おとうと",m:"👦"},{e:"grandmother",j:"おばあさん",m:"👵"},{e:"grandfather",j:"おじいさん",m:"👴"},
+{e:"baby",j:"あかちゃん",m:"👶"},{e:"friend",j:"ともだち",m:"🧑‍🤝‍🧑"},{e:"teacher",j:"せんせい",m:"🧑‍🏫"},
+{e:"doctor",j:"おいしゃさん",m:"🧑‍⚕️"},{e:"police officer",j:"けいさつかん",m:"👮"},{e:"cook",j:"コックさん",m:"🧑‍🍳"},
+{e:"singer",j:"かしゅ",m:"🎤"},{e:"king",j:"おうさま",m:"🤴"},{e:"queen",j:"じょおうさま",m:"👸"},
 {e:"baseball",j:"やきゅう",m:"⚾"},{e:"soccer",j:"サッカー",m:"⚽"},{e:"tennis",j:"テニス",m:"🎾"},
-{e:"basketball",j:"バスケットボール",m:"🏀"},{e:"swimming",j:"すいえい",m:"🏊"},{e:"music",j:"おんがく",m:"🎵"},
-{e:"piano",j:"ピアノ",m:"🎹"},{e:"guitar",j:"ギター",m:"🎸"},{e:"picture",j:"え・しゃしん",m:"🖼️"},
+{e:"basketball",j:"バスケットボール",m:"🏀"},{e:"volleyball",j:"バレーボール",m:"🏐"},{e:"badminton",j:"バドミントン",m:"🏸"},
+{e:"swimming",j:"すいえい",m:"🌊"},{e:"skiing",j:"スキー",m:"⛷️"},{e:"skating",j:"スケート",m:"⛸️"},
+{e:"dance",j:"ダンス",m:"💃"},{e:"music",j:"おんがく",m:"🎵"},{e:"piano",j:"ピアノ",m:"🎹"},
+{e:"guitar",j:"ギター",m:"🎸"},{e:"drum",j:"たいこ・ドラム",m:"🥁"},{e:"violin",j:"バイオリン",m:"🎻"},
 {e:"sun",j:"たいよう",m:"☀️"},{e:"rain",j:"あめ",m:"🌧️"},{e:"snow",j:"ゆき",m:"⛄"},
-{e:"flower",j:"はな",m:"🌸"},{e:"tree",j:"き",m:"🌳"},{e:"star",j:"ほし",m:"⭐"},
-{e:"moon",j:"つき",m:"🌙"},{e:"sea",j:"うみ",m:"🌊"},{e:"mountain",j:"やま",m:"⛰️"},
-{e:"run",j:"はしる",m:"🏃"},{e:"eat",j:"たべる",m:"😋"},{e:"sleep",j:"ねる",m:"😴"},
-{e:"sing",j:"うたう",m:"🎤"},{e:"read",j:"よむ",m:"📖"},{e:"cook",j:"りょうりする",m:"🍳"}
+{e:"cloud",j:"くも(そら)",m:"☁️"},{e:"rainbow",j:"にじ",m:"🌈"},{e:"flower",j:"はな",m:"🌸"},
+{e:"tree",j:"き",m:"🌳"},{e:"leaf",j:"はっぱ",m:"🍃"},{e:"star",j:"ほし",m:"⭐"},
+{e:"moon",j:"つき",m:"🌙"},{e:"sea",j:"うみ",m:"🐚"},{e:"river",j:"かわ",m:"🏞️"},
+{e:"mountain",j:"やま",m:"⛰️"},{e:"fire",j:"ひ",m:"🔥"},
+{e:"run",j:"はしる",m:"🏃"},{e:"walk",j:"あるく",m:"🚶"},{e:"jump",j:"ジャンプする",m:"🤸"},
+{e:"swim",j:"およぐ",m:"🏊‍♀️"},{e:"fly",j:"とぶ",m:"🕊️"},{e:"eat",j:"たべる",m:"😋"},
+{e:"drink",j:"のむ",m:"🥤"},{e:"sleep",j:"ねる",m:"😴"},{e:"sing",j:"うたう",m:"🎙️"},
+{e:"read",j:"よむ",m:"📖"},{e:"write",j:"かく",m:"✍️"},{e:"draw",j:"えをかく",m:"🎨"},
+{e:"study",j:"べんきょうする",m:"📝"},{e:"watch",j:"みる",m:"📺"},{e:"listen",j:"きく",m:"🎧"},
+{e:"speak",j:"はなす",m:"🗣️"},{e:"open",j:"あける",m:"🚪"},{e:"wash",j:"あらう",m:"🧼"},
+{e:"clean",j:"そうじする",m:"🧹"},{e:"cut",j:"きる",m:"🔪"},{e:"make",j:"つくる",m:"🔨"},
+{e:"help",j:"てつだう",m:"🤝"},{e:"smile",j:"わらう",m:"😊"},{e:"cry",j:"なく",m:"😭"},
+{e:"happy",j:"うれしい",m:"😄"},{e:"sad",j:"かなしい",m:"😢"},{e:"angry",j:"おこっている",m:"😡"},
+{e:"sleepy",j:"ねむい",m:"🥱"},{e:"hungry",j:"おなかがすいた",m:"🤤"},{e:"hot",j:"あつい",m:"🥵"},
+{e:"cold",j:"さむい",m:"🥶"},{e:"strong",j:"つよい",m:"💪"},{e:"cute",j:"かわいい",m:"🥰"},
+{e:"big",j:"おおきい",m:"🦣"},{e:"small",j:"ちいさい",m:"🐜"},{e:"fast",j:"はやい",m:"🐆"},
+{e:"hand",j:"て",m:"🖐️"},{e:"eye",j:"め",m:"👁️"},{e:"ear",j:"みみ",m:"👂"},
+{e:"nose",j:"はな(かお)",m:"👃"},{e:"mouth",j:"くち",m:"👄"},{e:"foot",j:"あし",m:"🦶"},
+{e:"cap",j:"ぼうし(キャップ)",m:"🧢"},{e:"hat",j:"ぼうし",m:"👒"},{e:"shirt",j:"シャツ",m:"👕"},
+{e:"shoes",j:"くつ",m:"👟"},{e:"socks",j:"くつした",m:"🧦"},{e:"dress",j:"ワンピース",m:"👗"},
+{e:"gloves",j:"てぶくろ",m:"🧤"},{e:"watch",j:"うでどけい",m:"⌚"},{e:"glasses",j:"めがね",m:"👓"},
+{e:"morning",j:"あさ",m:"🌅"},{e:"night",j:"よる",m:"🌃"},{e:"birthday",j:"たんじょうび",m:"🎂"},
+{e:"present",j:"プレゼント",m:"🎁"},{e:"party",j:"パーティー",m:"🎉"},{e:"money",j:"おかね",m:"💰"},
+{e:"letter",j:"てがみ",m:"✉️"},{e:"phone",j:"でんわ",m:"📱"},{e:"TV",j:"テレビ",m:"🖥️"},
+{e:"door",j:"ドア",m:"🚪"},{e:"window",j:"まど",m:"🪟"},{e:"bed",j:"ベッド",m:"🛏️"},
+{e:"box",j:"はこ",m:"📦"},{e:"key",j:"かぎ",m:"🔑"},{e:"robot",j:"ロボット",m:"🤖"},
+{e:"toy",j:"おもちゃ",m:"🧸"},{e:"balloon",j:"ふうせん",m:"🎈"},{e:"kite",j:"たこ(そら)",m:"🪁"}
 ];
 
-/* 5級形式: あなうめ3たく */
+/* 5級形式: あなうめ3たく(せいかいは つねに c[0]、ひょうじのとき シャッフル) */
 const GRAMMAR=[
-{q:"I ___ a student.",c:["am","is","are"],a:0,j:"わたしは がくせいです。"},
-{q:"You ___ my friend.",c:["is","are","am"],a:1,j:"あなたは わたしの ともだちです。"},
-{q:"This ___ my dog.",c:["are","am","is"],a:2,j:"これは わたしの いぬです。"},
-{q:"They ___ teachers.",c:["are","is","am"],a:0,j:"かれらは せんせいです。"},
-{q:"I ___ tennis every day.",c:["play","plays","playing"],a:0,j:"わたしは まいにち テニスをします。"},
-{q:"My mother ___ apples.",c:["like","likes","liking"],a:1,j:"おかあさんは りんごが すきです。"},
-{q:"We ___ to school.",c:["walks","walking","walk"],a:2,j:"わたしたちは がっこうへ あるいて いきます。"},
-{q:"___ you like cats?",c:["Do","Does","Is"],a:0,j:"あなたは ねこが すきですか?"},
-{q:"___ your father cook?",c:["Do","Does","Are"],a:1,j:"おとうさんは りょうりを しますか?"},
+{q:"I ___ happy.",c:["am","is","are"],a:0,j:"わたしは うれしいです。"},
+{q:"You ___ tall.",c:["are","is","am"],a:0,j:"あなたは せが たかいです。"},
+{q:"He ___ my brother.",c:["is","am","are"],a:0,j:"かれは わたしの おとうとです。"},
+{q:"She ___ a teacher.",c:["is","am","are"],a:0,j:"かのじょは せんせいです。"},
+{q:"It ___ a cat.",c:["is","am","are"],a:0,j:"それは ねこです。"},
+{q:"We ___ friends.",c:["are","is","am"],a:0,j:"わたしたちは ともだちです。"},
+{q:"They ___ students.",c:["are","is","am"],a:0,j:"かれらは がくせいです。"},
+{q:"This ___ my house.",c:["is","are","am"],a:0,j:"これは わたしの いえです。"},
+{q:"That ___ your bike.",c:["is","are","am"],a:0,j:"あれは あなたの じてんしゃです。"},
+{q:"My father ___ a doctor.",c:["is","are","am"],a:0,j:"おとうさんは おいしゃさんです。"},
+{q:"___ you a student? — Yes, I am.",c:["Are","Is","Am"],a:0,j:"あなたは がくせいですか? — はい、そうです。"},
+{q:"___ this your pen?",c:["Is","Are","Am"],a:0,j:"これは あなたの ペンですか?"},
+{q:"I ___ soccer.",c:["play","plays","playing"],a:0,j:"わたしは サッカーをします。"},
+{q:"She ___ English.",c:["studies","study","studying"],a:0,j:"かのじょは えいごを べんきょうします。"},
+{q:"He ___ TV every day.",c:["watches","watch","watching"],a:0,j:"かれは まいにち テレビを みます。"},
+{q:"We ___ milk.",c:["drink","drinks","drinking"],a:0,j:"わたしたちは ぎゅうにゅうを のみます。"},
+{q:"My mother ___ breakfast.",c:["cooks","cook","cooking"],a:0,j:"おかあさんは あさごはんを つくります。"},
+{q:"They ___ in the park.",c:["run","runs","running"],a:0,j:"かれらは こうえんで はしります。"},
+{q:"I ___ up at seven.",c:["get","gets","getting"],a:0,j:"わたしは 7じに おきます。"},
+{q:"The dog ___ fast.",c:["runs","run","running"],a:0,j:"その いぬは はやく はしります。"},
+{q:"My sister ___ the piano.",c:["plays","play","playing"],a:0,j:"おねえさんは ピアノを ひきます。"},
+{q:"I ___ to music.",c:["listen","listens","listening"],a:0,j:"わたしは おんがくを ききます。"},
+{q:"He ___ a bike.",c:["has","have","having"],a:0,j:"かれは じてんしゃを もっています。"},
+{q:"I ___ two cats.",c:["have","has","having"],a:0,j:"わたしは ねこを 2ひき かっています。"},
+{q:"She ___ to school at eight.",c:["goes","go","going"],a:0,j:"かのじょは 8じに がっこうへ いきます。"},
+{q:"Birds ___ in the sky.",c:["fly","flies","flying"],a:0,j:"とりは そらを とびます。"},
+{q:"___ you play tennis?",c:["Do","Does","Is"],a:0,j:"あなたは テニスをしますか?"},
+{q:"___ she like music?",c:["Does","Do","Is"],a:0,j:"かのじょは おんがくが すきですか?"},
+{q:"___ they live in Tokyo?",c:["Do","Does","Are"],a:0,j:"かれらは とうきょうに すんでいますか?"},
+{q:"Do you like dogs? — Yes, I ___.",c:["do","does","am"],a:0,j:"いぬが すき? — はい、すきです。"},
+{q:"Does he cook? — No, he ___.",c:["doesn't","don't","isn't"],a:0,j:"かれは りょうりする? — いいえ、しません。"},
+{q:"I ___ like carrots.",c:["don't","doesn't","am not"],a:0,j:"わたしは にんじんが すきではありません。"},
+{q:"She ___ play soccer.",c:["doesn't","don't","isn't"],a:0,j:"かのじょは サッカーをしません。"},
+{q:"___ your father drive a car?",c:["Does","Do","Is"],a:0,j:"おとうさんは くるまを うんてんしますか?"},
+{q:"What ___ you want?",c:["do","does","is"],a:0,j:"なにが ほしいですか?"},
+{q:"Where ___ he live?",c:["does","do","is"],a:0,j:"かれは どこに すんでいますか?"},
+{q:"We ___ watch TV at night.",c:["don't","doesn't","aren't"],a:0,j:"わたしたちは よるに テレビを みません。"},
+{q:"___ you have a pen?",c:["Do","Are","Is"],a:0,j:"ペンを もっていますか?"},
 {q:"I can ___ fast.",c:["run","runs","running"],a:0,j:"わたしは はやく はしれます。"},
-{q:"She can ___ the piano.",c:["plays","play","playing"],a:1,j:"かのじょは ピアノが ひけます。"},
-{q:"___ you swim? — Yes, I can.",c:["Do","Are","Can"],a:2,j:"あなたは およげますか? — はい、およげます。"},
-{q:"I am ___ a book now.",c:["reading","read","reads"],a:0,j:"わたしは いま ほんを よんでいます。"},
-{q:"He is ___ music.",c:["listen","listening to","listens"],a:1,j:"かれは おんがくを きいています。"},
-{q:"___ is that boy? — He is my brother.",c:["What","Where","Who"],a:2,j:"あの おとこのこは だれ? — わたしの おとうとです。"},
-{q:"___ do you eat lunch? — At twelve.",c:["When","Who","What"],a:0,j:"いつ おひるごはんを たべるの? — 12じだよ。"},
-{q:"___ is my bag? — It's on the desk.",c:["Who","Where","When"],a:1,j:"わたしの かばんは どこ? — つくえの うえだよ。"},
-{q:"___ old are you? — I'm five.",c:["What","Where","How"],a:2,j:"なんさいですか? — 5さいです。"},
-{q:"Look ___ the picture.",c:["at","on","in"],a:0,j:"えを みてください。"},
-{q:"The cat is ___ the box.",c:["at","in","to"],a:1,j:"ねこは はこの なかに います。"},
-{q:"I go to school ___ bus.",c:["by","on","at"],a:0,j:"わたしは バスで がっこうへ いきます。"},
-{q:"This is ___ book.",c:["I","my","me"],a:1,j:"これは わたしの ほんです。"},
-{q:"I like ___ very much.",c:["she","hers","her"],a:2,j:"わたしは かのじょが だいすきです。"},
-{q:"___ down, please.",c:["Sit","Sits","Sitting"],a:0,j:"すわって ください。"}
+{q:"She can ___ well.",c:["sing","sings","singing"],a:0,j:"かのじょは じょうずに うたえます。"},
+{q:"Can you ___ English?",c:["speak","speaks","speaking"],a:0,j:"えいごを はなせますか?"},
+{q:"He ___ swim.",c:["can","is","does"],a:0,j:"かれは およげます。"},
+{q:"Can she dance? — Yes, she ___.",c:["can","does","is"],a:0,j:"かのじょは おどれる? — はい、おどれます。"},
+{q:"Can you ski? — No, I ___.",c:["can't","don't","am not"],a:0,j:"スキーできる? — いいえ、できません。"},
+{q:"My brother can ___ curry.",c:["cook","cooks","cooking"],a:0,j:"おにいさんは カレーを つくれます。"},
+{q:"I ___ fly.",c:["can't","don't","am not"],a:0,j:"わたしは とべません。"},
+{q:"___ you open the door, please?",c:["Can","Is","Am"],a:0,j:"ドアを あけてくれますか?"},
+{q:"We can ___ the sea.",c:["see","sees","seeing"],a:0,j:"うみが みえます。"},
+{q:"I am ___ now.",c:["running","run","runs"],a:0,j:"わたしは いま はしっています。"},
+{q:"She is ___ a cake.",c:["making","make","makes"],a:0,j:"かのじょは ケーキを つくっています。"},
+{q:"They are ___ TV.",c:["watching","watch","watches"],a:0,j:"かれらは テレビを みています。"},
+{q:"What are you ___?",c:["doing","do","does"],a:0,j:"なにを しているの?"},
+{q:"The cat is ___ under the tree.",c:["sleeping","sleep","sleeps"],a:0,j:"ねこは きのしたで ねています。"},
+{q:"We are ___ lunch.",c:["eating","eat","eats"],a:0,j:"わたしたちは おひるごはんを たべています。"},
+{q:"He is ___ a letter.",c:["writing","write","writes"],a:0,j:"かれは てがみを かいています。"},
+{q:"Look! It is ___.",c:["raining","rain","rains"],a:0,j:"みて! あめが ふっています。"},
+{q:"I am ___ my room.",c:["cleaning","clean","cleans"],a:0,j:"わたしは へやを そうじしています。"},
+{q:"My father is ___ a book.",c:["reading","read","reads"],a:0,j:"おとうさんは ほんを よんでいます。"},
+{q:"___ is this? — It's a camera.",c:["What","Who","Where"],a:0,j:"これは なに? — カメラだよ。"},
+{q:"___ is that girl? — She is Yuki.",c:["Who","What","When"],a:0,j:"あの おんなのこは だれ? — ゆきちゃんだよ。"},
+{q:"___ is my cap? — It's on the bed.",c:["Where","What","Who"],a:0,j:"ぼうしは どこ? — ベッドの うえだよ。"},
+{q:"___ is your birthday? — It's May 5th.",c:["When","Where","Who"],a:0,j:"たんじょうびは いつ? — 5がつ5にちだよ。"},
+{q:"___ bag is this? — It's mine.",c:["Whose","Who","What"],a:0,j:"これは だれの かばん? — わたしのだよ。"},
+{q:"___ do you like, cats or dogs?",c:["Which","Who","Where"],a:0,j:"ねこと いぬ、どっちが すき?"},
+{q:"___ old is your sister?",c:["How","What","Who"],a:0,j:"いもうとさんは なんさい?"},
+{q:"___ many books do you have?",c:["How","What","Who"],a:0,j:"ほんを なんさつ もっているの?"},
+{q:"___ is the weather? — It's sunny.",c:["How","What","Who"],a:0,j:"てんきは どう? — はれだよ。"},
+{q:"___ time is it? — It's three.",c:["What","How","Where"],a:0,j:"いま なんじ? — 3じだよ。"},
+{q:"___ do you go to school? — By bus.",c:["How","What","Where"],a:0,j:"どうやって がっこうへ いくの? — バスだよ。"},
+{q:"___ color do you like?",c:["What","Who","How"],a:0,j:"なにいろが すき?"},
+{q:"___ is your favorite food?",c:["What","Who","Where"],a:0,j:"すきな たべものは なに?"},
+{q:"___ do you play tennis? — On Sundays.",c:["When","Who","What"],a:0,j:"いつ テニスをするの? — にちようびだよ。"},
+{q:"___ is that man? — He is my teacher.",c:["Who","What","Where"],a:0,j:"あの ひとは だれ? — せんせいだよ。"},
+{q:"___ many dogs do you have? — Two.",c:["How","What","Where"],a:0,j:"いぬを なんびき かっているの? — 2ひきだよ。"},
+{q:"The book is ___ the desk.",c:["on","in","to"],a:0,j:"ほんは つくえの うえに あります。"},
+{q:"The cat is ___ the box.",c:["in","on","at"],a:0,j:"ねこは はこの なかに います。"},
+{q:"The ball is ___ the chair.",c:["under","at","to"],a:0,j:"ボールは いすの したに あります。"},
+{q:"I get up ___ seven.",c:["at","on","in"],a:0,j:"わたしは 7じに おきます。"},
+{q:"We play soccer ___ Sundays.",c:["on","at","in"],a:0,j:"にちようびに サッカーをします。"},
+{q:"My birthday is ___ June.",c:["in","at","on"],a:0,j:"たんじょうびは 6がつです。"},
+{q:"Look ___ that bird!",c:["at","on","in"],a:0,j:"あの とりを みて!"},
+{q:"I go ___ school with my friend.",c:["to","at","on"],a:0,j:"ともだちと がっこうへ いきます。"},
+{q:"Let's play ___ the park.",c:["in","to","on"],a:0,j:"こうえんで あそぼう。"},
+{q:"I listen ___ music.",c:["to","at","on"],a:0,j:"おんがくを ききます。"},
+{q:"This is ___ book.",c:["my","I","me"],a:0,j:"これは わたしの ほんです。"},
+{q:"That is ___ bike.",c:["his","he","him"],a:0,j:"あれは かれの じてんしゃです。"},
+{q:"I like ___.",c:["her","she","hers"],a:0,j:"わたしは かのじょが すきです。"},
+{q:"___ is my friend.",c:["She","Her","Hers"],a:0,j:"かのじょは わたしの ともだちです。"},
+{q:"Do you know ___?",c:["him","he","his"],a:0,j:"かれを しっていますか?"},
+{q:"This bag is ___.",c:["mine","my","me"],a:0,j:"この かばんは わたしのです。"},
+{q:"___ are students.",c:["They","Them","Their"],a:0,j:"かれらは がくせいです。"},
+{q:"I play with ___.",c:["them","they","their"],a:0,j:"わたしは かれらと あそびます。"},
+{q:"___ name is Ken.",c:["His","He","Him"],a:0,j:"かれの なまえは ケンです。"},
+{q:"Look at ___.",c:["us","we","our"],a:0,j:"わたしたちを みて。"},
+{q:"___ your hands.",c:["Wash","Washes","Washing"],a:0,j:"てを あらいなさい。"},
+{q:"___ quiet, please.",c:["Be","Is","Are"],a:0,j:"しずかに してください。"},
+{q:"___ open the window.",c:["Don't","Doesn't","Isn't"],a:0,j:"まどを あけないで。"},
+{q:"___ play soccer! — Yes, let's!",c:["Let's","Do","Please"],a:0,j:"サッカーしようよ! — うん、しよう!"},
+{q:"Good ___! Have a nice day.",c:["morning","evening","night"],a:0,j:"おはよう! よいいちにちを。"},
+{q:"Nice to ___ you.",c:["meet","eat","make"],a:0,j:"はじめまして。"},
+{q:"Thank you. — You're ___.",c:["welcome","sorry","fine"],a:0,j:"ありがとう。 — どういたしまして。"},
+{q:"How are you? — I'm ___, thank you.",c:["fine","five","nice"],a:0,j:"げんき? — げんきだよ、ありがとう。"},
+{q:"___ is your name? — My name is Emi.",c:["What","How","Who"],a:0,j:"おなまえは? — エミです。"},
+{q:"See you ___.",c:["tomorrow","yesterday","last night"],a:0,j:"また あしたね。"},
+{q:"Here you ___.",c:["are","is","am"],a:0,j:"はい、どうぞ。"},
+{q:"___ me. Where is the station?",c:["Excuse","Thank","Sorry"],a:0,j:"すみません。えきは どこですか?"}
 ];
 
 /* ならべかえ(正しい順で格納) */
 const ORDER=[
-{j:"わたしは ねこが すきです。",w:["I","like","cats."]},
+{j:"わたしは いぬが すきです。",w:["I","like","dogs."]},
 {j:"これは わたしの ペンです。",w:["This","is","my","pen."]},
-{j:"あなたは りんごが すきですか?",w:["Do","you","like","apples?"]},
-{j:"わたしは じょうずに うたえます。",w:["I","can","sing","well."]},
-{j:"かのじょは わたしの おかあさんです。",w:["She","is","my","mother."]},
-{j:"わたしは いま テレビを みています。",w:["I","am","watching","TV","now."]},
-{j:"あなたの かばんは どこですか?",w:["Where","is","your","bag?"]},
+{j:"あれは ねこです。",w:["That","is","a","cat."]},
+{j:"わたしは うれしいです。",w:["I","am","happy."]},
+{j:"あなたは やさしいです。",w:["You","are","kind."]},
+{j:"かれは せが たかいです。",w:["He","is","tall."]},
+{j:"かのじょは わたしの おねえさんです。",w:["She","is","my","sister."]},
+{j:"わたしたちは ともだちです。",w:["We","are","friends."]},
+{j:"わたしは テニスをします。",w:["I","play","tennis."]},
+{j:"かのじょは おんがくが すきです。",w:["She","likes","music."]},
 {j:"かれは まいにち サッカーをします。",w:["He","plays","soccer","every","day."]},
+{j:"わたしは いぬを 2ひき かっています。",w:["I","have","two","dogs."]},
+{j:"かのじょは あかい かばんを もっています。",w:["She","has","a","red","bag."]},
+{j:"わたしは がっこうへ いきます。",w:["I","go","to","school."]},
+{j:"わたしたちは こうえんまで あるきます。",w:["We","walk","to","the","park."]},
+{j:"わたしは 7じに おきます。",w:["I","get","up","at","seven."]},
+{j:"あなたは ねこが すきですか?",w:["Do","you","like","cats?"]},
+{j:"かのじょは ピアノを ひきますか?",w:["Does","she","play","the","piano?"]},
+{j:"ペンを もっていますか?",w:["Do","you","have","a","pen?"]},
+{j:"わたしは へびが すきではありません。",w:["I","don't","like","snakes."]},
+{j:"かのじょは さかなを たべません。",w:["She","doesn't","eat","fish."]},
+{j:"わたしは はやく およげます。",w:["I","can","swim","fast."]},
+{j:"かれは じょうずに りょうりできます。",w:["He","can","cook","well."]},
+{j:"あなたは うたえますか?",w:["Can","you","sing?"]},
+{j:"かのじょは スキーが できますか?",w:["Can","she","ski?"]},
+{j:"わたしは とべません。",w:["I","can't","fly."]},
+{j:"わたしは おひるごはんを たべています。",w:["I","am","eating","lunch."]},
+{j:"かのじょは ほんを よんでいます。",w:["She","is","reading","a","book."]},
+{j:"かれらは サッカーを しています。",w:["They","are","playing","soccer."]},
+{j:"いま あめが ふっています。",w:["It","is","raining","now."]},
+{j:"これは なんですか?",w:["What","is","this?"]},
+{j:"あの おとこのこは だれですか?",w:["Who","is","that","boy?"]},
+{j:"わたしの ぼうしは どこですか?",w:["Where","is","my","cap?"]},
+{j:"あなたの たんじょうびは いつですか?",w:["When","is","your","birthday?"]},
+{j:"これは だれの かばんですか?",w:["Whose","bag","is","this?"]},
+{j:"あなたは なんさいですか?",w:["How","old","are","you?"]},
+{j:"ねこを なんびき かっていますか?",w:["How","many","cats","do","you","have?"]},
+{j:"いま なんじですか?",w:["What","time","is","it?"]},
 {j:"ドアを あけてください。",w:["Open","the","door,","please."]},
-{j:"わたしたちは がっこうへ いきます。",w:["We","go","to","school."]},
-{j:"あなたは およげますか?",w:["Can","you","swim?"]},
-{j:"あれは なんですか?",w:["What","is","that?"]}
+{j:"てを あらいなさい。",w:["Wash","your","hands."]},
+{j:"ここで はしらないで。",w:["Don't","run","here."]},
+{j:"テニスを しようよ。",w:["Let's","play","tennis."]},
+{j:"つきを みて。",w:["Look","at","the","moon."]},
+{j:"ねこは つくえの したに います。",w:["The","cat","is","under","the","desk."]},
+{j:"わたしの ほんは いすの うえに あります。",w:["My","book","is","on","the","chair."]},
+{j:"わたしは りんごと オレンジが すきです。",w:["I","like","apples","and","oranges."]},
+{j:"おとうさんは おいしゃさんです。",w:["My","father","is","a","doctor."]},
+{j:"かのじょの なまえは ゆきです。",w:["Her","name","is","Yuki."]},
+{j:"わたしたちは バスで どうぶつえんへ いきます。",w:["We","go","to","the","zoo","by","bus."]},
+{j:"わたしは まいにち えいごを べんきょうします。",w:["I","study","English","every","day."]}
 ];
 
-/* きくもんだい: 会話→しつもん→3たく */
+/* きくもんだい: 会話→しつもん→3たく(せいかいは つねに c[0])
+   g = こたえる人 (b=おとこのこ, g=おんなのこ) */
 const LISTEN=[
-{d:["Do you like dogs?","Yes, I do. I have a big dog."],q:"What does the girl have?",c:[{t:"a dog",m:"🐶"},{t:"a cat",m:"🐱"},{t:"a bird",m:"🐦"}],a:0},
-{d:["What do you want?","I want ice cream, please."],q:"What does the boy want?",c:[{t:"pizza",m:"🍕"},{t:"ice cream",m:"🍦"},{t:"cake",m:"🍰"}],a:1},
-{d:["Is this your pencil?","No. My pencil is red."],q:"What color is her pencil?",c:[{t:"blue",m:"🔵"},{t:"yellow",m:"🟡"},{t:"red",m:"🔴"}],a:2},
-{d:["Can you play the piano?","No, but I can play the guitar."],q:"What can the boy play?",c:[{t:"the guitar",m:"🎸"},{t:"the piano",m:"🎹"},{t:"tennis",m:"🎾"}],a:0},
-{d:["How do you go to school?","I go to school by bus."],q:"How does the girl go to school?",c:[{t:"by car",m:"🚗"},{t:"by bus",m:"🚌"},{t:"by train",m:"🚃"}],a:1},
-{d:["What are you doing?","I'm reading a book."],q:"What is the boy doing?",c:[{t:"sleeping",m:"😴"},{t:"singing",m:"🎤"},{t:"reading",m:"📖"}],a:2},
-{d:["Where is my cat?","It's under the desk."],q:"Where is the cat?",c:[{t:"under the desk",m:"🪑"},{t:"in the box",m:"📦"},{t:"on the bed",m:"🛏️"}],a:0},
-{d:["Do you like soccer?","No, I don't. I like baseball."],q:"What does the girl like?",c:[{t:"soccer",m:"⚽"},{t:"baseball",m:"⚾"},{t:"basketball",m:"🏀"}],a:1},
-{d:["What time do you get up?","I get up at seven."],q:"When does the boy get up?",c:[{t:"at six",m:"6️⃣"},{t:"at eight",m:"8️⃣"},{t:"at seven",m:"7️⃣"}],a:2},
-{d:["Whose bag is this?","It's my mother's bag."],q:"Whose bag is it?",c:[{t:"his mother's",m:"👩"},{t:"his father's",m:"👨"},{t:"his sister's",m:"👧"}],a:0},
-{d:["Is it sunny today?","No, it's raining."],q:"How is the weather?",c:[{t:"sunny",m:"☀️"},{t:"rainy",m:"🌧️"},{t:"snowy",m:"⛄"}],a:1},
-{d:["What animal do you like?","I like rabbits. They are cute!"],q:"What animal does the girl like?",c:[{t:"pandas",m:"🐼"},{t:"bears",m:"🐻"},{t:"rabbits",m:"🐰"}],a:2}
+{g:"g",d:["Do you like dogs?","Yes, I do. I have a big dog."],q:"What does the girl have?",c:[{t:"a dog",m:"🐶"},{t:"a cat",m:"🐱"},{t:"a bird",m:"🐦"}],a:0},
+{g:"b",d:["What do you want?","I want ice cream, please."],q:"What does the boy want?",c:[{t:"ice cream",m:"🍦"},{t:"pizza",m:"🍕"},{t:"cake",m:"🍰"}],a:0},
+{g:"g",d:["Is this your pencil?","No. My pencil is red."],q:"What color is her pencil?",c:[{t:"red",m:"🔴"},{t:"blue",m:"🔵"},{t:"yellow",m:"🟡"}],a:0},
+{g:"b",d:["Can you play the piano?","No, but I can play the guitar."],q:"What can the boy play?",c:[{t:"the guitar",m:"🎸"},{t:"the piano",m:"🎹"},{t:"the violin",m:"🎻"}],a:0},
+{g:"g",d:["How do you go to school?","I go to school by bus."],q:"How does the girl go to school?",c:[{t:"by bus",m:"🚌"},{t:"by car",m:"🚗"},{t:"by train",m:"🚃"}],a:0},
+{g:"b",d:["What are you doing?","I'm reading a book."],q:"What is the boy doing?",c:[{t:"reading",m:"📖"},{t:"sleeping",m:"😴"},{t:"singing",m:"🎤"}],a:0},
+{g:"b",d:["Where is my cat?","It's under the desk."],q:"Where is the cat?",c:[{t:"under the desk",m:"🪑"},{t:"in the box",m:"📦"},{t:"on the bed",m:"🛏️"}],a:0},
+{g:"g",d:["Do you like soccer?","No, I don't. I like baseball."],q:"What does the girl like?",c:[{t:"baseball",m:"⚾"},{t:"soccer",m:"⚽"},{t:"basketball",m:"🏀"}],a:0},
+{g:"b",d:["What time do you get up?","I get up at seven."],q:"When does the boy get up?",c:[{t:"at seven",m:"7️⃣"},{t:"at six",m:"6️⃣"},{t:"at eight",m:"8️⃣"}],a:0},
+{g:"b",d:["Whose bag is this?","It's my mother's bag."],q:"Whose bag is it?",c:[{t:"his mother's",m:"👩"},{t:"his father's",m:"👨"},{t:"his sister's",m:"👧"}],a:0},
+{g:"g",d:["Is it sunny today?","No, it's raining."],q:"How is the weather?",c:[{t:"rainy",m:"🌧️"},{t:"sunny",m:"☀️"},{t:"snowy",m:"⛄"}],a:0},
+{g:"g",d:["What animal do you like?","I like rabbits. They are cute!"],q:"What animal does the girl like?",c:[{t:"rabbits",m:"🐰"},{t:"pandas",m:"🐼"},{t:"bears",m:"🐻"}],a:0},
+{g:"g",d:["What do you have in your bag?","I have two books."],q:"What does the girl have?",c:[{t:"two books",m:"📚"},{t:"two pens",m:"🖊️"},{t:"two caps",m:"🧢"}],a:0},
+{g:"b",d:["Do you like milk?","No, I don't. I like juice."],q:"What does the boy like?",c:[{t:"juice",m:"🧃"},{t:"milk",m:"🥛"},{t:"tea",m:"🍵"}],a:0},
+{g:"b",d:["Is that your dog?","No, it's my sister's dog."],q:"Whose dog is it?",c:[{t:"his sister's",m:"👧"},{t:"his mother's",m:"👩"},{t:"his friend's",m:"🧑‍🤝‍🧑"}],a:0},
+{g:"g",d:["What sport do you play?","I play basketball."],q:"What sport does the girl play?",c:[{t:"basketball",m:"🏀"},{t:"tennis",m:"🎾"},{t:"volleyball",m:"🏐"}],a:0},
+{g:"b",d:["Where do you live?","I live near the station."],q:"Where does the boy live?",c:[{t:"near the station",m:"🚉"},{t:"near the zoo",m:"🦁"},{t:"near the park",m:"🛝"}],a:0},
+{g:"g",d:["What time is it now?","It's nine."],q:"What time is it?",c:[{t:"nine",m:"9️⃣"},{t:"five",m:"5️⃣"},{t:"ten",m:"🔟"}],a:0},
+{g:"b",d:["Do you walk to school?","No, I go by bike."],q:"How does the boy go to school?",c:[{t:"by bike",m:"🚲"},{t:"by bus",m:"🚌"},{t:"on foot",m:"🚶"}],a:0},
+{g:"g",d:["What color is your new bag?","It's green."],q:"What color is her bag?",c:[{t:"green",m:"🟢"},{t:"pink",m:"🩷"},{t:"black",m:"⚫"}],a:0},
+{g:"g",d:["Do you have brothers?","Yes, I have one brother."],q:"How many brothers does the girl have?",c:[{t:"one",m:"1️⃣"},{t:"two",m:"2️⃣"},{t:"three",m:"3️⃣"}],a:0},
+{g:"b",d:["What's your favorite fruit?","I like strawberries."],q:"What fruit does the boy like?",c:[{t:"strawberries",m:"🍓"},{t:"bananas",m:"🍌"},{t:"peaches",m:"🍑"}],a:0},
+{g:"g",d:["Are you hungry?","Yes! Let's eat pizza."],q:"What do they eat?",c:[{t:"pizza",m:"🍕"},{t:"curry",m:"🍛"},{t:"soup",m:"🥣"}],a:0},
+{g:"b",d:["Where is Dad?","He is cooking in the kitchen."],q:"What is Dad doing?",c:[{t:"cooking",m:"🍳"},{t:"reading",m:"📖"},{t:"cleaning",m:"🧹"}],a:0},
+{g:"g",d:["Can your cat swim?","No, but it can jump high."],q:"What can the cat do?",c:[{t:"jump",m:"🤸"},{t:"swim",m:"🏊"},{t:"fly",m:"🕊️"}],a:0},
+{g:"b",d:["When do you play the piano?","After dinner."],q:"When does the boy play the piano?",c:[{t:"after dinner",m:"🌃"},{t:"in the morning",m:"🌅"},{t:"at school",m:"🏫"}],a:0},
+{g:"g",d:["Whose umbrella is this?","It's mine. It's new."],q:"Whose umbrella is it?",c:[{t:"the girl's",m:"👧"},{t:"the boy's",m:"👦"},{t:"the teacher's",m:"🧑‍🏫"}],a:0},
+{g:"b",d:["What do you do on Sundays?","I play soccer with my friends."],q:"What does the boy do on Sundays?",c:[{t:"plays soccer",m:"⚽"},{t:"plays tennis",m:"🎾"},{t:"watches TV",m:"📺"}],a:0},
+{g:"g",d:["Is your school big?","Yes, it is. It's very big."],q:"How is her school?",c:[{t:"big",m:"🏫"},{t:"small",m:"🏠"},{t:"new",m:"✨"}],a:0},
+{g:"b",d:["What's for breakfast?","Eggs and bread."],q:"What is for breakfast?",c:[{t:"eggs and bread",m:"🍳"},{t:"rice and fish",m:"🍚"},{t:"cake and milk",m:"🍰"}],a:0},
+{g:"g",d:["Do you like winter?","Yes! I can make a snowman."],q:"What can the girl make?",c:[{t:"a snowman",m:"⛄"},{t:"a cake",m:"🍰"},{t:"a kite",m:"🪁"}],a:0},
+{g:"b",d:["Where are my shoes?","They are by the door."],q:"Where are the shoes?",c:[{t:"by the door",m:"🚪"},{t:"under the bed",m:"🛏️"},{t:"in the bag",m:"🎒"}],a:0},
+{g:"g",d:["What's your favorite animal?","I like penguins!"],q:"What animal does the girl like?",c:[{t:"penguins",m:"🐧"},{t:"koalas",m:"🐨"},{t:"foxes",m:"🦊"}],a:0},
+{g:"b",d:["Can you ski?","Yes, I can. I ski in winter."],q:"What can the boy do?",c:[{t:"ski",m:"⛷️"},{t:"skate",m:"⛸️"},{t:"swim",m:"🏊"}],a:0},
+{g:"g",d:["Who is that woman?","She is my mother. She's a doctor."],q:"Who is the woman?",c:[{t:"her mother",m:"👩"},{t:"her teacher",m:"🧑‍🏫"},{t:"her grandmother",m:"👵"}],a:0},
+{g:"b",d:["What are you drinking?","I'm drinking orange juice."],q:"What is the boy drinking?",c:[{t:"orange juice",m:"🧃"},{t:"water",m:"💧"},{t:"milk",m:"🥛"}],a:0},
+{g:"g",d:["Do you play any sports?","Yes, I play tennis every Saturday."],q:"When does the girl play tennis?",c:[{t:"on Saturdays",m:"🎾"},{t:"on Mondays",m:"📅"},{t:"every day",m:"☀️"}],a:0},
+{g:"b",d:["Is your birthday in May?","No, it's in July."],q:"When is the boy's birthday?",c:[{t:"in July",m:"🎂"},{t:"in May",m:"🌸"},{t:"in December",m:"⛄"}],a:0},
+{g:"g",d:["What is your cat's name?","Her name is Momo. She is white."],q:"What color is the cat?",c:[{t:"white",m:"⚪"},{t:"black",m:"⚫"},{t:"brown",m:"🟤"}],a:0},
+{g:"b",d:["Let's go to the zoo!","Great! I want to see the elephants."],q:"What does the boy want to see?",c:[{t:"elephants",m:"🐘"},{t:"lions",m:"🦁"},{t:"monkeys",m:"🐵"}],a:0},
+{g:"g",d:["How many pencils do you have?","I have five pencils."],q:"How many pencils does the girl have?",c:[{t:"five",m:"5️⃣"},{t:"four",m:"4️⃣"},{t:"nine",m:"9️⃣"}],a:0},
+{g:"b",d:["Are you sleepy?","Yes. I go to bed at nine."],q:"When does the boy go to bed?",c:[{t:"at nine",m:"9️⃣"},{t:"at seven",m:"7️⃣"},{t:"at ten",m:"🔟"}],a:0},
+{g:"g",d:["What do you study today?","I study English and music."],q:"What does the girl study?",c:[{t:"English and music",m:"🎵"},{t:"English and math",m:"🔢"},{t:"music and art",m:"🎨"}],a:0},
+{g:"b",d:["Is this your notebook?","No. Mine is blue."],q:"What color is his notebook?",c:[{t:"blue",m:"🔵"},{t:"red",m:"🔴"},{t:"green",m:"🟢"}],a:0},
+{g:"g",d:["Where is your grandmother?","She lives on a farm."],q:"Where does the grandmother live?",c:[{t:"on a farm",m:"🚜"},{t:"in a castle",m:"🏰"},{t:"near the beach",m:"🏖️"}],a:0},
+{g:"b",d:["What do you want for your birthday?","I want a robot!"],q:"What does the boy want?",c:[{t:"a robot",m:"🤖"},{t:"a bike",m:"🚲"},{t:"a ball",m:"⚽"}],a:0},
+{g:"g",d:["Do you help your mother?","Yes, I wash the dishes."],q:"What does the girl do?",c:[{t:"washes the dishes",m:"🧼"},{t:"cleans the room",m:"🧹"},{t:"cooks dinner",m:"🍳"}],a:0},
+{g:"b",d:["Look at the sky!","Wow, I can see a rainbow!"],q:"What can they see?",c:[{t:"a rainbow",m:"🌈"},{t:"the moon",m:"🌙"},{t:"a plane",m:"✈️"}],a:0},
+{g:"g",d:["What subject do you like?","I like art. I draw every day."],q:"What does the girl do every day?",c:[{t:"draws",m:"🎨"},{t:"sings",m:"🎤"},{t:"dances",m:"💃"}],a:0},
+{g:"b",d:["Are you cold?","Yes. Where are my gloves?"],q:"What is the boy looking for?",c:[{t:"his gloves",m:"🧤"},{t:"his socks",m:"🧦"},{t:"his cap",m:"🧢"}],a:0}
 ];
 
 /* どうぶつフレンズ */
@@ -416,32 +636,50 @@ const store=(()=>{let mem={};let ok=true;
     save(d){mem.d=d;try{if(ok)localStorage.setItem("eikenquest_v1",JSON.stringify(d));}catch(e){}}
   };
 })();
-let S=store.load();
+let S=Object.assign({stars:0,hatched:0,plays:0,seen:{}},store.load());
 
 /* ================= AUDIO (TTS) ================= */
-let enVoice=null;
+/* 本番の5級とおなじく、アメリカ発音の話者を中心に イギリス発音の話者もまぜる */
+let VP={us:[],gb:[],usF:[],usM:[],gbF:[],gbM:[]};
+const FEM=/female|samantha|victoria|karen|moira|tessa|serena|kate|allison|ava|susan|zira|hazel|joanna|kendra|salli|amy|emma|nicole|libby|sonia/i;
+const MAL=/male|daniel|alex|fred|oliver|thomas|arthur|aaron|david|mark|george|james|guy|brian|matthew|russell|ryan|christopher/i;
 function pickVoice(){
   const vs=speechSynthesis.getVoices();
-  enVoice=vs.find(v=>/en[-_]US/i.test(v.lang)&&/Samantha|Google US/i.test(v.name))
-        ||vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
+  const us=vs.filter(v=>/en[-_]US/i.test(v.lang));
+  const gb=vs.filter(v=>/en[-_]GB/i.test(v.lang));
+  const anyEn=vs.filter(v=>/^en/i.test(v.lang));
+  VP.us=us.length?us:anyEn; VP.gb=gb.length?gb:VP.us;
+  VP.usF=VP.us.filter(v=>FEM.test(v.name)); VP.usM=VP.us.filter(v=>MAL.test(v.name));
+  VP.gbF=VP.gb.filter(v=>FEM.test(v.name)); VP.gbM=VP.gb.filter(v=>MAL.test(v.name));
 }
 if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
-function speak(text,rate=0.8){
+function getVoice(accent,gender){
+  const key=accent+(gender==="g"?"F":gender==="b"?"M":"");
+  const pool=VP[key]&&VP[key].length?VP[key]:VP[accent];
+  if(pool&&pool.length)return{v:pool[Math.floor(Math.random()*pool.length)],matched:VP[key]&&VP[key].length>0};
+  return{v:null,matched:false};
+}
+function rndAccent(){return Math.random()<0.7?"us":"gb";}
+function makeU(text,rate,accent,gender){
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=accent==="gb"?"en-GB":"en-US";
+  const g=getVoice(accent,gender);
+  if(g.v)u.voice=g.v;
+  u.rate=rate;
+  u.pitch=g.matched?1.0:(gender==="g"?1.3:gender==="b"?0.9:1.05);
+  return u;
+}
+function speak(text,rate=0.8,accent="us",gender=null){
   if(!("speechSynthesis" in window))return;
   speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang="en-US";if(enVoice)u.voice=enVoice;
-  u.rate=rate;u.pitch=1.1;
-  speechSynthesis.speak(u);
+  speechSynthesis.speak(makeU(text,rate,accent,gender));
 }
-function speakLines(lines,rate=0.8){
+function speakLines(lines,plan,rate=0.78){
   if(!("speechSynthesis" in window))return;
   speechSynthesis.cancel();
   lines.forEach((t,i)=>{
-    const u=new SpeechSynthesisUtterance(t);
-    u.lang="en-US";if(enVoice)u.voice=enVoice;
-    u.rate=rate;u.pitch=i%2===0?1.0:1.25; /* A/Bで声色をかえる */
-    speechSynthesis.speak(u);
+    const p=plan&&plan[i]?plan[i]:{accent:"us",gender:null};
+    speechSynthesis.speak(makeU(t,rate,p.accent,p.gender));
   });
 }
 
@@ -449,6 +687,16 @@ function speakLines(lines,rate=0.8){
 const $=s=>document.querySelector(s);
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function sample(a,n){return shuffle(a).slice(0,n);}
+function smartSample(key,pool,n){
+  /* 出題ずみをきろくし、プールを一巡するまで おなじ問題を出さない */
+  let seen=(S.seen&&S.seen[key])||[];
+  let unseen=pool.map((_,i)=>i).filter(i=>!seen.includes(i));
+  if(unseen.length<n){seen=[];unseen=pool.map((_,i)=>i);}
+  const pick=shuffle(unseen).slice(0,n);
+  if(!S.seen)S.seen={};
+  S.seen[key]=seen.concat(pick);store.save(S);
+  return pick.map(i=>pool[i]);
+}
 function goto(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   $("#scr-"+id).classList.add("active");
@@ -554,13 +802,13 @@ let sess=null;
 function startSession(mode){
   let qs;
   if(mode==="word"){
-    qs=sample(WORDS,Q_PER_SESSION).map(w=>({type:Math.random()<0.5?"w-listen":"w-read",w}));
+    qs=smartSample("word",WORDS,Q_PER_SESSION).map(w=>({type:Math.random()<0.5?"w-listen":"w-read",w}));
   }else if(mode==="grammar"){
-    qs=sample(GRAMMAR,Q_PER_SESSION).map(g=>({type:"grammar",g}));
+    qs=smartSample("grammar",GRAMMAR,Q_PER_SESSION).map(g=>({type:"grammar",g}));
   }else if(mode==="order"){
-    qs=sample(ORDER,Q_PER_SESSION).map(o=>({type:"order",o}));
+    qs=smartSample("order",ORDER,Q_PER_SESSION).map(o=>({type:"order",o}));
   }else{
-    qs=sample(LISTEN,Q_PER_SESSION).map(l=>({type:"listen",l}));
+    qs=smartSample("listen",LISTEN,Q_PER_SESSION).map(l=>({type:"listen",l}));
   }
   sess={mode,qs,i:0,correct:0,results:[]};
   $("#star-in-quiz").textContent=S.stars;
@@ -600,7 +848,13 @@ function renderQ(){
 
 /* --- たんご: きいて絵をえらぶ --- */
 function renderWordListen(q,area){
-  const others=sample(WORDS.filter(w=>w.e!==q.w.e),3);
+  const acc=rndAccent();
+  const others=[];
+  for(const w of shuffle(WORDS)){
+    if(w.e===q.w.e||w.m===q.w.m)continue;
+    if(others.some(o=>o.m===w.m||o.e===w.e))continue;
+    others.push(w);if(others.length===3)break;
+  }
   const opts=shuffle([q.w,...others]);
   area.innerHTML=
     '<div class="q-card"><span class="q-label">🍎 たんご</span>'+
@@ -616,19 +870,24 @@ function renderWordListen(q,area){
       b.classList.add(good?"correct":"wrong");
       if(!good)[...area.querySelectorAll(".choice")].find(x=>x.dataset.e===q.w.e).classList.add("correct");
       fb(good?"せいかい! ⭐":"ざんねん! こたえは「"+q.w.j+"」",good);
-      speak(q.w.e,0.75);
+      speak(q.w.e,0.75,acc);
       award(good);next(good?1500:2300);
     });
     b.dataset.e=w.e;
     $("#q-ch",area).appendChild(b);
   });
-  $("#q-play").addEventListener("click",()=>speak(q.w.e,0.7));
-  setTimeout(()=>speak(q.w.e,0.7),350);
+  $("#q-play").addEventListener("click",()=>speak(q.w.e,0.7,acc));
+  setTimeout(()=>speak(q.w.e,0.7,acc),350);
 }
 
 /* --- たんご: よんでえらぶ --- */
 function renderWordRead(q,area){
-  const others=sample(WORDS.filter(w=>w.e!==q.w.e),2);
+  const others=[];
+  for(const w of shuffle(WORDS)){
+    if(w.e===q.w.e)continue;
+    if(others.some(o=>o.e===w.e))continue;
+    others.push(w);if(others.length===2)break;
+  }
   const opts=shuffle([q.w,...others]);
   area.innerHTML=
     '<div class="q-card"><span class="q-label">🍎 たんご(よむ)</span>'+
@@ -739,13 +998,19 @@ function renderOrder(q,area){
 function renderListen(q,area){
   const l=q.l;
   const idxs=shuffle([0,1,2]);
+  const askG=l.g==="g"?"b":"g";
+  const plan=[
+    {accent:rndAccent(),gender:askG},
+    {accent:rndAccent(),gender:l.g},
+    {accent:"us",gender:null}
+  ];
   area.innerHTML=
     '<div class="q-card"><span class="q-label">🎧 きくもんだい</span>'+
     '<div class="q-big-emoji">👧💬👦</div>'+
     '<div class="q-ja">おはなしと しつもんを よくきいてね</div>'+
     '<button class="btn listen-btn" id="q-play"><span class="sp">🔊</span> きく</button></div>'+
     '<div class="choices" id="q-ch"></div>';
-  const playAll=()=>speakLines([...l.d,"Question. "+l.q],0.78);
+  const playAll=()=>speakLines([...l.d,"Question. "+l.q],plan);
   idxs.forEach(i=>{
     const c=l.c[i];
     const b=document.createElement("button");

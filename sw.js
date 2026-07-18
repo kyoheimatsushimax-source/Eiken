@@ -1,4 +1,4 @@
-const CACHE = "eiken-quest-v1";
+const CACHE = "eiken-quest-v2";
 const SHELL = [
   "./",
   "./index.html",
